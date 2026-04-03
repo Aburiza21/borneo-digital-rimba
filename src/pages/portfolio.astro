@@ -1,0 +1,29 @@
+---
+import PortfolioPage from "../components/PortfolioPage";
+import ThreeCanvas from "../components/ThreeCanvas";
+import { LanguageProvider } from "../components/LanguageContext";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Archive | Abu Riza — Borneo Digital Rimba</title>
+    <meta name="description" content="Portfolio Archive Abu Riza — Programmer, Analis Data, dan Desainer. Karya pilihan dari Borneo Digital Rimba." />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- 3D Background Layer -->
+    <div style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;">
+      <ThreeCanvas client:only="react" />
+    </div>
+
+    <!-- Portfolio Slideshow Page -->
+    <PortfolioPage client:only="react" />
+  </body>
+</html>
