@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, MessageSquare, RefreshCcw, ShieldCheck, Radio, Send, Zap } from 'lucide-react';
 import { DayakMotifs } from './DayakMotifs';
 import { useLanguage } from './LanguageContext';
+import SectionWrapper from './SectionWrapper';
 
 const GitHubIcon = ({ size = 24 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -27,21 +28,20 @@ export default function Contact({ activeStep = 0 }: ContactProps) {
   const { t } = useLanguage();
 
   const content = {
-    tag:    { id: 'COMM_UPLINK_INITIALIZING', en: 'COMM_UPLINK_INITIALIZING' },
-    title:  { id: 'Simpul Koneksi', en: 'Connect Node' },
-    desc:   {
-      id: 'Matahari digital sedang terbenam di atas rimba. Hubungi saya untuk sinkronisasi sistem dan membangun evolusi siber berikutnya.',
-      en: 'The digital sun is setting over the rimba. Reach out to sync our systems and forge the next cyber-evolution.',
+    tag: { id: 'COMM_UPLINK_INITIALIZING', en: 'COMM_UPLINK_INITIALIZING' },
+    title: { id: 'Mari Berkolaborasi', en: 'Let\'s Collaborate' },
+    desc: {
+      id: 'Dengan pengalaman lintas disiplin dari Full Stack Engineering hingga infrastruktur DevOps dan IT Support, saya siap membantu merealisasikan dan mengoptimalkan sistem digital Anda. Mari diskusikan inovasi Anda selanjutnya.',
+      en: 'With cross-disciplinary experience from Full Stack Engineering to DevOps infrastructure and IT Support, I am ready to help realize and optimize your digital systems. Let\'s discuss your next innovation.',
     },
     secure: { id: 'SALURAN_AMAN // AES-256', en: 'AES-256_SECURE_CHANNEL' },
     reboot: { id: 'BOOT_ULANG_KE_ATAS', en: 'REBOOT_SYSTEM_TOP' },
-    avail:  { id: 'TERSEDIA UNTUK PROYEK BARU', en: 'AVAILABLE FOR NEW PROJECTS' },
   };
 
   const socials = [
-    { icon: <GitHubIcon size={22} />,    label: 'GITHUB',    url: 'https://github.com/Aburiza21',                    color: 'var(--accent-color)' },
-    { icon: <LinkedInIcon size={22} />,  label: 'LINKEDIN',  url: 'https://linkedin.com/in/abu-riza-02a31625a',      color: 'var(--accent-secondary)' },
-    { icon: <MessageSquare size={22} />, label: 'WHATSAPP',  url: 'https://wa.me/628989825205',                      color: 'var(--accent-tertiary)' },
+    { icon: <GitHubIcon size={22} />, label: 'GITHUB', url: 'https://github.com/Aburiza21', color: 'var(--accent-color)' },
+    { icon: <LinkedInIcon size={22} />, label: 'LINKEDIN', url: 'https://linkedin.com/in/abu-riza-02a31625a', color: 'var(--accent-secondary)' },
+    { icon: <MessageSquare size={22} />, label: 'WHATSAPP', url: 'https://wa.me/628989825205', color: 'var(--accent-tertiary)' },
   ];
 
   const fadeUp = (delay = 0) => ({
@@ -51,48 +51,34 @@ export default function Contact({ activeStep = 0 }: ContactProps) {
   });
 
   return (
-    <div style={{
-      width: '100%',
-      height: '100dvh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 'clamp(1rem, 4vw, 3rem) clamp(1rem, 6vw, 6rem)',
-      boxSizing: 'border-box',
-      overflow: 'hidden',
-      position: 'relative',
-    }}>
-
-      {/* ── Ambient glow ── */}
-      <motion.div
-        animate={{ opacity: [0.06, 0.14, 0.06], scale: [1, 1.15, 1] }}
-        transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-        style={{
-          position: 'absolute',
-          width: 'min(900px, 100vw)',
-          height: 'min(900px, 100vw)',
-          background: 'radial-gradient(circle, var(--accent-tertiary) 0%, transparent 65%)',
-          borderRadius: '50%',
-          filter: 'blur(80px)',
-          pointerEvents: 'none',
-          zIndex: 0,
-        }}
-      />
-
-      {/* Section background */}
-      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/assets/bg/bg_contact.png)', backgroundSize: 'cover', backgroundPosition: 'center bottom', opacity: 0.1, mixBlendMode: 'screen', pointerEvents: 'none', maskImage: 'radial-gradient(ellipse 85% 85% at 50% 55%, black 10%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 85% 85% at 50% 55%, black 10%, transparent 100%)' }} />
-
-      {/* ── Two-column grid ── */}
-      <div style={{
-        width: '100%',
-        maxWidth: '1400px',
+    <SectionWrapper
+      bgImage="/assets/bg/bg_contact.png"
+      bgOpacity={0.1}
+      bgPosition="center bottom"
+      bgMask="radial-gradient(ellipse 85% 85% at 50% 55%, black 10%, transparent 100%)"
+      glow={
+        <motion.div
+          animate={{ opacity: [0.06, 0.14, 0.06], scale: [1, 1.15, 1] }}
+          transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+          style={{
+            position: 'absolute',
+            width: 'min(900px, 100vw)',
+            height: 'min(900px, 100vw)',
+            background: 'radial-gradient(circle, var(--accent-tertiary) 0%, transparent 65%)',
+            borderRadius: '50%',
+            filter: 'blur(80px)',
+            pointerEvents: 'none',
+            zIndex: 0,
+          }}
+        />
+      }
+      contentStyle={{
         display: 'grid',
         gridTemplateColumns: '1fr clamp(300px, 44%, 620px)',
         gap: 'clamp(2rem, 5vw, 7rem)',
         alignItems: 'center',
-        position: 'relative',
-        zIndex: 1,
-      }}>
+      }}
+    >
 
         {/* ────── LEFT: Title + Description ────── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(1.2rem, 2.5vh, 2rem)' }}>
@@ -116,10 +102,10 @@ export default function Contact({ activeStep = 0 }: ContactProps) {
           <motion.div {...fadeUp(0.08)}>
             <h1 style={{
               fontFamily: 'var(--font-header)',
-              fontSize: 'clamp(3rem, 8vw, 7rem)',
+              fontSize: 'clamp(2.2rem, 5vw, 4.5rem)',
               fontWeight: 950,
-              lineHeight: 0.88,
-              letterSpacing: 'clamp(-2px, -0.5vw, -5px)',
+              lineHeight: 1.1,
+              letterSpacing: 'clamp(-1px, -0.2vw, -2px)',
               textTransform: 'uppercase',
               margin: 0,
               background: 'linear-gradient(160deg, #ffffff 0%, rgba(255,255,255,0.7) 45%, var(--accent-tertiary) 100%)',
@@ -132,20 +118,7 @@ export default function Contact({ activeStep = 0 }: ContactProps) {
             </h1>
           </motion.div>
 
-          {/* Role line */}
-          <motion.div {...fadeUp(0.15)} style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div style={{ width: '36px', height: '2px', background: 'var(--accent-tertiary)', flexShrink: 0 }} />
-            <span style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(0.62rem, 1.4vw, 0.85rem)',
-              color: 'var(--accent-tertiary)',
-              letterSpacing: '0.3em',
-              textTransform: 'uppercase',
-              opacity: 0.8,
-            }}>
-              {t('avail', content.avail)}
-            </span>
-          </motion.div>
+
 
           {/* Dayak divider */}
           <motion.div {...fadeUp(0.2)} style={{ opacity: 0.35, maxWidth: '420px' }}>
@@ -301,37 +274,6 @@ export default function Contact({ activeStep = 0 }: ContactProps) {
             </AnimatePresence>
           </div>
 
-          {/* Availability status card */}
-          <motion.div
-            animate={{ opacity: activeStep === 1 ? 1 : 0.3 }}
-            transition={{ duration: 0.7 }}
-            style={{
-              padding: 'clamp(0.9rem, 1.8vw, 1.2rem) clamp(1rem, 2vw, 1.5rem)',
-              border: '1px solid rgba(57,255,20,0.12)',
-              background: 'rgba(2,6,23,0.7)',
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              gap: '1rem',
-              backdropFilter: 'blur(10px)',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <motion.div
-                animate={{ scale: [1, 1.4, 1], opacity: [0.6, 1, 0.6] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-tertiary)', boxShadow: '0 0 10px var(--accent-tertiary)', flexShrink: 0 }}
-              />
-              <span style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'clamp(0.6rem, 1.1vw, 0.72rem)',
-                color: 'var(--accent-tertiary)',
-                letterSpacing: '1.5px',
-                textTransform: 'uppercase',
-              }}>
-                {t('avail', content.avail)}
-              </span>
-            </div>
-            <Zap size={16} color="var(--accent-tertiary)" opacity={0.6} />
-          </motion.div>
 
           {/* Reboot button */}
           <motion.button
@@ -360,7 +302,6 @@ export default function Contact({ activeStep = 0 }: ContactProps) {
             {t('reboot', content.reboot)}
           </motion.button>
         </motion.div>
-      </div>
-    </div>
+    </SectionWrapper>
   );
 }

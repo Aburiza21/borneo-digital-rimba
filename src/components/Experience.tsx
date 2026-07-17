@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { History, Activity, Briefcase, Calendar, ChevronRight, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { Terminal, Crosshair, Cpu, Database, CheckCircle, ExternalLink, Network, Globe, History, Activity, Briefcase, Calendar, ChevronRight, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { DayakMotifs } from './DayakMotifs';
 import { useLanguage } from './LanguageContext';
+import SectionWrapper from './SectionWrapper';
 
 interface ExperienceProps {
   activeStep?: number;
@@ -10,45 +11,87 @@ interface ExperienceProps {
 
 const experiences = [
   {
-    id: '᚛ XP-MEDIKA-01 ᚜',
-    year: '2025 — PRESENT',
+    id: '᚛ XP-KALANARA-01 ᚜',
+    year: 'DES 2025 — PRESENT',
     duration: { id: 'Aktif Saat Ini', en: 'Currently Active' },
-    role: { id: 'IT Staff', en: 'IT Staff' },
-    company: 'RS MITRA MEDIKA',
-    companyFull: 'RS Mitra Medika (PT Hexa Daya Medika)',
+    role: { id: 'Full Stack Developer', en: 'Full Stack Developer' },
+    company: 'KALANARA GROUP',
+    companyFull: 'PT Kalanara Group Indonesia',
     desc: {
-      id: 'Memimpin pengembangan aplikasi internal full-stack untuk mengotomasi proses operasional rumah sakit. Bertanggung jawab atas infrastruktur IT, jaringan, server, dan sistem secara menyeluruh.',
-      en: 'Leading internal full-stack application development to automate hospital operational processes. Responsible for complete IT infrastructure, networking, servers, and systems.',
+      id: 'Merancang dan mengembangkan aplikasi untuk meningkatkan efisiensi operasional. Memberikan dukungan teknis kepada pengguna dan menyiapkan infrastruktur teknis sebagai fondasi awal proyek.',
+      en: 'Designing and developing applications to improve operational efficiency. Providing technical support to users and preparing technical infrastructure as the initial project foundation.',
     },
     highlights: [
-      { id: 'Pengembang sistem HIS dengan 60+ modul', en: 'HIS system developer with 60+ modules' },
-      { id: 'Integrasi SATUSEHAT (Kemenkes)', en: 'SATUSEHAT Integration (Ministry of Health)' },
-      { id: 'Pengelolaan infrastruktur IT & jaringan', en: 'IT infrastructure & network management' },
-      { id: 'Supervisor teknis tim developer internal', en: 'Technical supervisor for internal dev team' },
+      { id: 'Pengembangan & troubleshooting aplikasi', en: 'Application development & troubleshooting' },
+      { id: 'Dukungan teknis responsif', en: 'Responsive technical support' },
+      { id: 'Persiapan infrastruktur awal proyek', en: 'Initial project infrastructure setup' },
+      { id: 'Manajemen proyek mandiri/tim', en: 'Independent/team project management' },
     ],
-    tech: ['Laravel', 'React', 'Inertia', 'SQLite', 'Docker', 'Linux'],
+    tech: ['Laravel', 'React', 'PostgreSQL', 'Next.js', 'Golang', 'Python', 'Docker', 'CI/CD', 'SSH/Linux', 'Vector DB', 'Indexing', 'gRPC', 'NATS', 'Swagger', 'AI Integration', 'SSO'],
     theme: 'var(--accent-color)',
     status: 'LIVE',
   },
   {
-    id: '᚛ XP-REACTIVE-02 ᚜',
-    year: '2024 — 2025',
-    duration: { id: '±1 Tahun', en: '±1 Year' },
+    id: '᚛ XP-MEDIKA-02 ᚜',
+    year: 'MAR 2025 — DES 2025',
+    duration: { id: '10 Bulan', en: '10 Months' },
+    role: { id: 'IT Staff', en: 'IT Staff' },
+    company: 'RS MITRA MEDIKA',
+    companyFull: 'RS Mitra Medika (PT Hexa Daya Medika)',
+    desc: {
+      id: 'Memimpin pengembangan aplikasi internal full-stack untuk mengotomasi proses operasional rumah sakit. Bertanggung jawab atas pemeliharaan dan peningkatan infrastruktur IT secara menyeluruh.',
+      en: 'Leading internal full-stack application development to automate hospital operational processes. Responsible for comprehensive IT infrastructure maintenance and improvement.',
+    },
+    highlights: [
+      { id: 'Otomatisasi proses operasional RS', en: 'Hospital operational automation' },
+      { id: 'Troubleshooting & maintenance infrastruktur', en: 'Infrastructure troubleshooting & maintenance' },
+      { id: 'Pengelolaan sistem, jaringan & hardware', en: 'System, network & hardware management' },
+      { id: 'Penyusunan dokumentasi teknis', en: 'Technical documentation preparation' },
+    ],
+    tech: ['Laravel', 'React', 'Flutter', '.NET', 'IT Support', 'On-Premise Server', 'ISO 27000', 'SSL', 'Windows', 'TCP/IP', 'Troubleshooting', 'VMware ESXi', 'Mikrotik', 'VPN', 'Helpdesk'],
+    theme: 'var(--accent-tertiary)',
+    status: 'COMPLETED',
+  },
+  {
+    id: '᚛ XP-REACTIVE-03 ᚜',
+    year: 'JUN 2024 — JAN 2025',
+    duration: { id: '8 Bulan', en: '8 Months' },
     role: { id: 'Technical Lead', en: 'Technical Lead' },
     company: 'REACTIVE INC.',
     companyFull: 'Reactive Incorporated (PT Sepakat Digital)',
     desc: {
-      id: 'Memimpin dan memberdayakan tim produksi melalui analisis kinerja rutin. Merancang arsitektur dan pondasi teknis untuk berbagai proyek baru serta mengelola siklus hidup proyek secara end-to-end.',
-      en: 'Leading and empowering production teams through routine performance reviews. Designed architecture and technical foundations for new projects, managing end-to-end project lifecycles.',
+      id: 'Memimpin tim produksi melalui analisis kinerja rutin untuk meningkatkan efisiensi. Merancang arsitektur dan pondasi teknis untuk proyek baru serta mengelola siklus hidup proyek end-to-end.',
+      en: 'Leading production teams through routine performance analysis to improve efficiency. Designed architecture and technical foundations for new projects, managing end-to-end project lifecycles.',
     },
     highlights: [
-      { id: 'Perancangan arsitektur sistem enterprise', en: 'Enterprise system architecture design' },
-      { id: 'Memimpin tim 4–6 developer', en: 'Leading team of 4–6 developers' },
-      { id: 'Manajemen sprint & code review', en: 'Sprint management & code review' },
-      { id: 'Pengiriman 3 proyek enterprise besar', en: 'Delivered 3 major enterprise projects' },
+      { id: 'Peningkatan produktivitas tim', en: 'Team productivity improvement' },
+      { id: 'Perancangan arsitektur sistem baru', en: 'New system architecture design' },
+      { id: 'Manajemen siklus proyek end-to-end', en: 'End-to-end project lifecycle management' },
+      { id: 'Pemenuhan standar kualitas & waktu', en: 'Quality & timeline standard fulfillment' },
     ],
-    tech: ['Laravel', 'React', 'Node.js', 'Postgres', 'Docker', 'Scrum'],
-    theme: 'var(--accent-tertiary)',
+    tech: ['Laravel', 'React', 'MySQL', 'DevOps', 'JavaScript', 'jQuery', 'Bootstrap', 'Tailwind CSS'],
+    theme: 'var(--accent-secondary)',
+    status: 'COMPLETED',
+  },
+  {
+    id: '᚛ XP-IMPACH-04 ᚜',
+    year: 'MAR 2024 — JUN 2024',
+    duration: { id: '4 Bulan', en: '4 Months' },
+    role: { id: 'Backend Developer', en: 'Backend Developer' },
+    company: 'IMPACH SOLUSI',
+    companyFull: 'Impach Solusi Digital (PT Solusi Digital)',
+    desc: {
+      id: 'Merancang dan mengembangkan REST-API andal berkinerja tinggi untuk aplikasi multi-platform. Membangun struktur database efisien dengan menerapkan monitoring ketat dan kontrol kualitas.',
+      en: 'Designed and developed highly reliable REST APIs for multi-platform applications. Built efficient database structures by applying strict monitoring and quality controls.',
+    },
+    highlights: [
+      { id: 'Pengembangan REST-API multi-platform', en: 'Multi-platform REST-API development' },
+      { id: 'Optimasi database & struktur data', en: 'Database & data structure optimization' },
+      { id: 'Implementasi keamanan & privasi data', en: 'Data security & privacy implementation' },
+      { id: 'Peningkatan sistem berkelanjutan', en: 'Continuous system improvement' },
+    ],
+    tech: ['Laravel', 'CodeIgniter', 'PHP', 'MySQL', 'REST API'],
+    theme: 'var(--accent-color)',
     status: 'COMPLETED',
   },
 ];
@@ -58,77 +101,39 @@ export default function Experience({ activeStep = 0 }: ExperienceProps) {
 
   const exp = experiences[activeStep] ?? experiences[0];
 
-  const labels = {
-    heading: { id: 'LOG_EVOLUSI_LELUHUR', en: 'LIFECYCLE_ANCESTRAL_DATA' },
-    title: { id: 'Log Evolusi', en: 'Evolution Logs' },
-  };
+
 
   return (
-    <div style={{
-      width: '100%',
-      height: '100dvh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 'clamp(1rem, 4vw, 2.5rem) clamp(1rem, 6vw, 6rem)',
-      boxSizing: 'border-box',
-      overflow: 'hidden',
-      position: 'relative',
-    }}>
-
-      {/* Ambient glow */}
-      <motion.div
-        animate={{ opacity: [0.05, 0.13, 0.05] }}
-        transition={{ repeat: Infinity, duration: 5 }}
-        style={{
-          position: 'absolute',
-          top: '-10%', right: '5%',
-          width: '700px', height: '700px',
-          background: `radial-gradient(circle, ${exp.theme} 0%, transparent 65%)`,
-          filter: 'blur(100px)',
-          pointerEvents: 'none', zIndex: 0,
-          transition: 'background 0.8s ease',
-        }}
-      />
-
-      {/* Section background */}
-      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/assets/bg/bg_experience.png)', backgroundSize: 'cover', backgroundPosition: 'center left', opacity: 0.09, mixBlendMode: 'screen', pointerEvents: 'none', maskImage: 'linear-gradient(to right, black 0%, rgba(0,0,0,0.4) 50%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, black 0%, rgba(0,0,0,0.4) 50%, transparent 100%)' }} />
-
-      <div style={{
-        maxWidth: '1400px',
-        width: '100%',
+    <SectionWrapper
+      bgImage="/assets/bg/bg_experience.png"
+      bgPosition="center left"
+      bgMask="linear-gradient(to right, black 0%, rgba(0,0,0,0.4) 50%, transparent 100%)"
+      glow={
+        <motion.div
+          animate={{ opacity: [0.05, 0.13, 0.05] }}
+          transition={{ repeat: Infinity, duration: 5 }}
+          style={{
+            position: 'absolute',
+            top: '-10%', right: '5%',
+            width: '700px', height: '700px',
+            background: `radial-gradient(circle, ${exp.theme} 0%, transparent 65%)`,
+            filter: 'blur(100px)',
+            pointerEvents: 'none', zIndex: 0,
+            transition: 'background 0.8s ease',
+          }}
+        />
+      }
+      contentStyle={{
         display: 'grid',
         gridTemplateColumns: '1fr clamp(260px, 36%, 480px)',
         gap: 'clamp(2rem, 5vw, 6rem)',
         alignItems: 'center',
-        position: 'relative',
-        zIndex: 1,
-      }}>
+      }}
+    >
 
         {/* ──────────── LEFT: Active Experience Spotlight ──────────── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(1rem, 2.5vh, 1.8rem)' }}>
 
-          {/* Section header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="tribal-heading" style={{ marginBottom: '0.4rem' }}>
-              {t('heading', labels.heading)}
-            </div>
-            <h2 className="section-title" style={{
-              color: exp.theme,
-              fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
-              margin: 0,
-              display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap',
-              transition: 'color 0.5s ease',
-              textShadow: `0 0 30px ${exp.theme}50`,
-            }}>
-              <History size={36} />
-              {t('title', labels.title)}
-            </h2>
-          </motion.div>
 
           {/* Crossfade experience detail */}
           <AnimatePresence mode="wait">
@@ -429,7 +434,7 @@ export default function Experience({ activeStep = 0 }: ExperienceProps) {
             })}
           </div>
 
-          {/* BNSP Certificate Badge */}
+          {/* Company Redirect Button */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -437,37 +442,42 @@ export default function Experience({ activeStep = 0 }: ExperienceProps) {
             style={{ marginTop: 'clamp(1.5rem, 3vh, 2.5rem)', paddingLeft: '56px' }}
           >
             <div className="hud-tag" style={{ opacity: 0.4, fontSize: '0.58rem', marginBottom: '0.6rem', letterSpacing: '2px' }}>
-              AUTHORITY_STATUS
+              EXTERNAL_LINK // {exp.company}
             </div>
-            <motion.div
-              animate={{ boxShadow: ['0 0 8px var(--accent-tertiary)30', '0 0 25px var(--accent-tertiary)60', '0 0 8px var(--accent-tertiary)30'] }}
-              transition={{ repeat: Infinity, duration: 4 }}
+            <motion.a
+              href={`https://www.google.com/search?q=${encodeURIComponent(exp.companyFull)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02, x: 5, backgroundColor: `${exp.theme}15` }}
+              whileTap={{ scale: 0.98 }}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '12px',
                 padding: '0.75rem 1.2rem',
-                border: '1px solid rgba(57,255,20,0.5)',
-                background: 'rgba(57,255,20,0.05)',
+                border: `1px solid ${exp.theme}50`,
+                background: `${exp.theme}0a`,
+                color: exp.theme,
+                textDecoration: 'none',
                 clipPath: 'polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)',
+                transition: 'all 0.3s ease'
               }}
             >
-              <DayakMotifs.AncientSeal size={22} color="var(--accent-tertiary)" />
-              <div>
-                <div style={{ fontFamily: 'var(--font-header)', fontSize: '0.95rem', fontWeight: 900, color: 'var(--accent-tertiary)', letterSpacing: '2px' }}>
-                  BNSP CERTIFIED
-                </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', color: 'rgba(255,255,255,0.35)', letterSpacing: '1px' }}>
-                  NATIONAL_CERTIFICATION // VERIFIED
-                </div>
+              <Briefcase size={18} />
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span style={{ fontFamily: 'var(--font-header)', fontSize: '0.85rem', fontWeight: 900, letterSpacing: '1px' }}>
+                  {t('visit_company', { id: 'PROFIL PERUSAHAAN', en: 'COMPANY PROFILE' })}
+                </span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', opacity: 0.7, letterSpacing: '1px' }}>
+                  REDIRECT_UPLINK →
+                </span>
               </div>
-            </motion.div>
+            </motion.a>
 
             {/* Divider below */}
             <div style={{ marginTop: '1.2rem', opacity: 0.25 }}>
-              <DayakMotifs.MandauDivider color="var(--accent-tertiary)" />
+              <DayakMotifs.MandauDivider color={exp.theme} />
             </div>
           </motion.div>
         </motion.div>
-      </div>
-    </div>
+    </SectionWrapper>
   );
 }

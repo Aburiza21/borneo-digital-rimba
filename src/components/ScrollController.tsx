@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import HeroIntro from './HeroIntro';
-import HeroAbout from './HeroAbout';
 import Education from './Education';
 import Experience from './Experience';
 import Services from './Services';
@@ -10,11 +9,10 @@ import Contact from './Contact';
 
 const SECTIONS = [
   { id: 'hero', steps: 1, Component: HeroIntro },
-  { id: 'about', steps: 1, Component: HeroAbout },
-  { id: 'experience', steps: 2, Component: Experience },
+  { id: 'experience', steps: 4, Component: Experience },
   { id: 'education', steps: 2, Component: Education },
-  { id: 'services', steps: 3, Component: Services },
-  { id: 'portfolio', steps: 4, Component: Portfolio },
+  { id: 'services', steps: 6, Component: Services },
+  { id: 'portfolio', steps: 3, Component: Portfolio },
   { id: 'contact', steps: 2, Component: Contact },
 ];
 

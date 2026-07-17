@@ -1,14 +1,43 @@
 import React from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ExternalLink, Award, ChevronRight, Layers } from 'lucide-react';
+import { ExternalLink, ChevronRight, Layers, ArrowUpRight, Award } from 'lucide-react';
 import { DayakMotifs } from './DayakMotifs';
 import { useLanguage } from './LanguageContext';
+import SectionWrapper from './SectionWrapper';
 
 interface PortfolioProps {
   activeStep?: number;
 }
 
 const projects = [
+  {
+    id: '᚛ PRE-DIGITAL-06 ᚜',
+    title: { id: 'Presensi Digital Office', en: 'Digital Office Attendance' },
+    category: { id: 'HR & Management', en: 'HR & Management' },
+    image: '/assets/projects/presensi.png',
+    link: 'https://digitaloffice.kemenhub.go.id/',
+    tech: ['Laravel Blade', 'Tailwind', 'Docker', 'Kubernetes', 'SSO'],
+    achievement: { id: 'Sistem Kehadiran Terintegrasi', en: 'Integrated Attendance System' },
+    accent: 'var(--accent-color)',
+    desc: {
+      id: 'Aplikasi presensi digital dengan skalabilitas tinggi menggunakan Kubernetes dan integrasi SSO untuk kemudahan akses karyawan.',
+      en: 'Digital attendance application with high scalability using Kubernetes and SSO integration for easy employee access.'
+    }
+  },
+  {
+    id: '᚛ KMS-SYSTEM-05 ᚜',
+    title: { id: 'KMS Knowledge Management', en: 'Knowledge Management System' },
+    category: { id: 'Enterprise Solutions', en: 'Enterprise Solutions' },
+    image: '/assets/projects/kms.png',
+    link: '#',
+    tech: ['Golang', 'Python', 'Next.js', 'PostgreSQL', 'Docker', 'SSO'],
+    achievement: { id: 'Sistem Manajemen Pengetahuan Terpusat', en: 'Centralized Knowledge Management System' },
+    accent: 'var(--accent-tertiary)',
+    desc: {
+      id: 'Platform manajemen pengetahuan untuk mengorganisir, menyimpan, dan membagikan informasi enterprise secara efisien dengan integrasi SSO.',
+      en: 'Knowledge management platform to organize, store, and share enterprise information efficiently with SSO integration.'
+    }
+  },
   {
     id: '᚛ LOG-SMART-01 ᚜',
     title: { id: 'Logbook (Control Room)', en: 'Logbook (Control Room)' },
@@ -17,52 +46,10 @@ const projects = [
     link: '#',
     tech: ['Laravel', 'Inertia', 'React', 'Postgres', 'Docker'],
     achievement: { id: 'Silver Award & Top 3 Presentasi Terbaik', en: 'Silver Award & Top 3 Best Presentation' },
-    accent: 'var(--accent-tertiary)',
+    accent: 'var(--accent-secondary)',
     desc: {
       id: 'Sistem operasional terpusat untuk industri kritis dengan reliabilitas tinggi. Mendigitalisasi pencatatan operasional secara real-time.',
       en: 'Centralized operational system for critical industry with high reliability. Digitalizing operational logging with real-time visibility.'
-    }
-  },
-  {
-    id: '᚛ POS-REACTIVE-02 ᚜',
-    title: { id: 'Reactive POS', en: 'Reactive POS' },
-    category: { id: 'Enterprise Solutions', en: 'Enterprise Solutions' },
-    image: '/assets/projects/pos.png',
-    link: 'https://rbpkasir-lite.rumahbelajarprinting.com/',
-    tech: ['React', 'Node.js', 'Express', 'Postgres', 'Docker'],
-    achievement: { id: 'Reduksi waktu proses order hingga 50%', en: 'Reduced order process time by 50%' },
-    accent: 'var(--accent-color)',
-    desc: {
-      id: 'Aplikasi kasir enterprise berbasis web yang mendukung operasional multi-cabang dengan manajemen gudang terpusat.',
-      en: 'Web-based enterprise POS supporting multi-branch operations with centralized warehouse management.'
-    }
-  },
-  {
-    id: '᚛ GIS-FLOOD-03 ᚜',
-    title: { id: 'SIBeBan (GIS)', en: 'SIBeBan (GIS)' },
-    category: { id: 'Geospatial & Analytics', en: 'Geospatial & Analytics' },
-    image: '/assets/projects/gis.png',
-    link: 'https://github.com/Aburiza41/SIBeBan',
-    tech: ['Python', 'React', 'Leaflet', 'PostGIS'],
-    achievement: { id: 'Peringatan dini banjir — Sintang', en: 'Flood early warning for Sintang District' },
-    accent: 'var(--accent-secondary)',
-    desc: {
-      id: 'Platform GIS berbasis web untuk memantau dan memprediksi wilayah rawan banjir secara real-time.',
-      en: 'Web-based GIS platform to monitor and predict flood-prone areas in real-time with data analysis.'
-    }
-  },
-  {
-    id: '᚛ HIS-INTEGRA-04 ᚜',
-    title: { id: 'Hospital Info System', en: 'Hospital Info System' },
-    category: { id: 'Healthcare Tech', en: 'Healthcare Tech' },
-    image: '/assets/projects/his.png',
-    link: '#',
-    tech: ['Laravel', 'Inertia', 'React', 'SQLite', 'Docker'],
-    achievement: { id: '60+ Modul & Integrasi SATUSEHAT', en: '60+ Modules & SATUSEHAT Integration' },
-    accent: 'var(--accent-color)',
-    desc: {
-      id: 'Platform terintegrasi untuk manajemen rumah sakit lengkap — Rawat Jalan, IGD, Farmasi, Keuangan.',
-      en: 'Integrated platform for complete hospital management — Outpatient, ER, Pharmacy, Finance.'
     }
   },
 ];
@@ -70,61 +57,41 @@ const projects = [
 export default function Portfolio({ activeStep = 0 }: PortfolioProps) {
   const { t } = useLanguage();
 
-  const labels = {
-    heading: { id: 'ARSIP_SEJARAH_DATA', en: 'HISTORICAL_ARCHIVE' },
-    title: { id: 'Relikui Digital', en: 'Digital Relics' },
-    access: { id: 'AKSES_DATA', en: 'RECOVER_ACCESS' },
-  };
+
 
   const proj = projects[activeStep] ?? projects[0];
 
   return (
-    <div style={{
-      width: '100%',
-      height: '100dvh',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      padding: 'clamp(1rem, 4vw, 2.5rem) clamp(1rem, 6vw, 6rem)',
-      boxSizing: 'border-box',
-      overflow: 'hidden',
-      position: 'relative',
-    }}>
-
-      {/* ── Ambient Accent Glow ── */}
-      <motion.div
-        animate={{ opacity: [0.05, 0.12, 0.05] }}
-        transition={{ repeat: Infinity, duration: 5 }}
-        style={{
-          position: 'absolute',
-          bottom: '-20%', left: '20%',
-          width: '700px', height: '700px',
-          background: `radial-gradient(circle, ${proj.accent} 0%, transparent 65%)`,
-          filter: 'blur(100px)',
-          pointerEvents: 'none', zIndex: 0,
-          transition: 'background 0.8s ease',
-        }}
-      />
-
-      {/* Section background */}
-      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/assets/bg/bg_portfolio.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.1, mixBlendMode: 'screen', pointerEvents: 'none', maskImage: 'radial-gradient(ellipse 80% 80% at 50% 60%, black 15%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 50% 60%, black 15%, transparent 100%)' }} />
-
-      <div style={{ maxWidth: '1400px', width: '100%', margin: '0 auto', position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', gap: 'clamp(1rem, 2.5vh, 2rem)' }}>
+    <SectionWrapper
+      bgImage="/assets/bg/bg_portfolio.png"
+      bgOpacity={0.1}
+      bgMask="radial-gradient(ellipse 80% 80% at 50% 60%, black 15%, transparent 100%)"
+      glow={
+        <motion.div
+          animate={{ opacity: [0.05, 0.12, 0.05] }}
+          transition={{ repeat: Infinity, duration: 5 }}
+          style={{
+            position: 'absolute',
+            bottom: '-20%', left: '20%',
+            width: '700px', height: '700px',
+            background: `radial-gradient(circle, ${proj.accent} 0%, transparent 65%)`,
+            filter: 'blur(100px)',
+            pointerEvents: 'none', zIndex: 0,
+            transition: 'background 0.8s ease',
+          }}
+        />
+      }
+      contentStyle={{
+        margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'clamp(1rem, 2.5vh, 2rem)',
+      }}
+    >
 
         {/* ── Compact Header ── */}
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-          <div>
-            <div className="tribal-heading" style={{ marginBottom: '0.3rem' }}>{t('heading', labels.heading)}</div>
-            <h2 className="section-title" style={{
-              color: proj.accent,
-              fontSize: 'clamp(2rem, 5vw, 4rem)',
-              margin: 0,
-              transition: 'color 0.5s ease',
-              textShadow: `0 0 30px ${proj.accent}50`,
-            }}>
-              {t('title', labels.title)}
-            </h2>
-          </div>
+
 
           {/* Project index pills */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
@@ -303,41 +270,68 @@ export default function Portfolio({ activeStep = 0 }: PortfolioProps) {
               </div>
 
               {/* CTA */}
-              <motion.a
-                href={proj.link === '#' ? undefined : proj.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: proj.link !== '#' ? 1.03 : 1 }}
-                whileTap={{ scale: proj.link !== '#' ? 0.97 : 1 }}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '12px',
-                  padding: 'clamp(0.7rem, 1.5vw, 1rem) clamp(1.2rem, 2.5vw, 2rem)',
-                  border: `1px solid ${proj.accent}50`,
-                  background: `${proj.accent}10`,
-                  color: proj.accent,
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.75rem',
-                  fontWeight: 700,
-                  letterSpacing: '3px',
-                  textTransform: 'uppercase',
-                  textDecoration: 'none',
-                  cursor: proj.link !== '#' ? 'pointer' : 'not-allowed',
-                  clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)',
-                  opacity: proj.link !== '#' ? 1 : 0.4,
-                  width: 'fit-content',
-                  transition: 'all 0.25s',
-                }}
-              >
-                <ExternalLink size={15} />
-                {t('access', { id: 'AKSES_DATA', en: 'RECOVER ACCESS' })}
-              </motion.a>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <motion.a
+                  href={proj.link === '#' ? undefined : proj.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: proj.link !== '#' ? 1.03 : 1 }}
+                  whileTap={{ scale: proj.link !== '#' ? 0.97 : 1 }}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '12px',
+                    padding: 'clamp(0.7rem, 1.5vw, 1rem) clamp(1.2rem, 2.5vw, 2rem)',
+                    border: `1px solid ${proj.accent}50`,
+                    background: `${proj.accent}10`,
+                    color: proj.accent,
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    letterSpacing: '3px',
+                    textTransform: 'uppercase',
+                    textDecoration: 'none',
+                    cursor: proj.link !== '#' ? 'pointer' : 'not-allowed',
+                    clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)',
+                    opacity: proj.link !== '#' ? 1 : 0.4,
+                    width: 'fit-content',
+                    transition: 'all 0.25s',
+                  }}
+                >
+                  <ExternalLink size={15} />
+                  {t('access', { id: 'Kunjungi', en: 'Visit' })}
+                </motion.a>
+
+                <motion.a
+                  href="/portfolio"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '12px',
+                    padding: 'clamp(0.7rem, 1.5vw, 1rem) clamp(1.2rem, 2.5vw, 2rem)',
+                    border: `1px solid var(--accent-secondary)50`,
+                    background: `var(--accent-secondary)10`,
+                    color: 'var(--accent-secondary)',
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    letterSpacing: '2px',
+                    textTransform: 'uppercase',
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                    clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)',
+                    width: 'fit-content',
+                    transition: 'all 0.25s',
+                  }}
+                >
+                  <Layers size={15} />
+                  {t('view_all', { id: 'Project Lainnya', en: 'Other Projects' })}
+                </motion.a>
+              </div>
 
             </motion.div>
           </AnimatePresence>
         </div>
 
-      </div>
-    </div>
+    </SectionWrapper>
   );
 }
 

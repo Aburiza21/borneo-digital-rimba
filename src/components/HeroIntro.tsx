@@ -1,25 +1,43 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { DayakMotifs } from './DayakMotifs';
 import { useLanguage } from './LanguageContext';
-import { Terminal, Cpu, Database, Zap, Shield, MapPin, Clock } from 'lucide-react';
+import SectionWrapper from './SectionWrapper';
+import { Terminal, Cpu, Database, Zap, Shield, MapPin, Clock, Mail, MessageSquare, X, Code2, Users, Layers, Download, FileText, Award, ShieldCheck, FileCheck2 } from 'lucide-react';
 
 export default function HeroIntro() {
   const { t } = useLanguage();
+  const [showContactModal, setShowContactModal] = useState(false);
 
   const content = {
     tag: { id: '᚛ SYSTEM_INIT_V4.2 ᚜', en: '᚛ SYSTEM_INIT_V4.2 ᚜' },
-    role: { id: 'Neural Architect & Full Stack Operative', en: 'Neural Architect & Full Stack Operative' },
+    role: { id: 'Full Stack Developer', en: 'Full Stack Developer' },
     welcome: {
-      id: 'Di jantung Digital Rimba, di mana biner bertemu leluhur. Saya menenun kode menjadi artefak masa depan, memadukan kearifan Dayak dengan presisi algoritma.',
-      en: 'In the heart of the Digital Rimba, where binary meets ancestry. I weave code into future artifacts, blending Dayak wisdom with algorithmic precision.'
+      id: 'Full-Stack Developer dengan 4+ tahun pengalaman dan rekam jejak sebagai Technical Lead. Ahli dalam merancang arsitektur yang robust dan membangun solusi end-to-end yang scalable. Terbiasa memimpin tim lintas disiplin untuk mengubah konsep teknis menjadi produk yang mendorong pertumbuhan bisnis dan pengalaman pengguna yang luar biasa.',
+      en: 'Full-Stack Developer with 4+ years of experience and a proven track record as a Technical Lead. Expert in designing robust architectures and building scalable end-to-end solutions. Accustomed to leading cross-functional teams to transform technical concepts into products that drive business growth and exceptional user experiences.'
     },
-    location: { id: 'BORNEO_MATRIX_NODE_05', en: 'BORNEO_MATRIX_NODE_05' }
+    location: { id: 'PONTIANAK, INDONESIA', en: 'PONTIANAK, INDONESIA' },
+    cv: { id: 'UNDUH CV', en: 'DOWNLOAD CV' },
+    portfolio: { id: 'PORTOFOLIO PDF', en: 'PORTFOLIO PDF' },
+    cert: { id: 'SERTIFIKAT BNSP', en: 'BNSP CERTIFICATE' }
   };
+
+  const competencies = [
+    { icon: <Code2 size={16} />, label: { id: 'Full Stack Engineering', en: 'Full Stack Engineering' }, pct: 92, color: 'var(--accent-color)' },
+    { icon: <Users size={16} />, label: { id: 'Technical Leadership', en: 'Technical Leadership' }, pct: 88, color: 'var(--accent-tertiary)' },
+    { icon: <Layers size={16} />, label: { id: 'System Architecture', en: 'System Architecture' }, pct: 85, color: 'var(--accent-secondary)' },
+    { icon: <Cpu size={16} />, label: { id: 'DevOps & Infra', en: 'DevOps & Infra' }, pct: 78, color: 'var(--accent-color)' },
+  ];
+
+  const creds = [
+    { label: t('cv', content.cv), file: '/assets/cv.pdf', accent: 'var(--accent-color)', icon: <Download size={14} /> },
+    { label: t('portfolio', content.portfolio), file: '/assets/portfolio.pdf', accent: 'var(--accent-secondary)', icon: <FileText size={14} /> },
+    { label: t('cert', content.cert), file: '/assets/certificate.pdf', accent: 'var(--accent-tertiary)', icon: <Award size={14} /> },
+  ];
 
   const stats = [
     { label: { id: 'PENGALAMAN', en: 'EXPERIENCE' }, value: '4+', unit: { id: 'TH', en: 'YRS' }, color: 'var(--accent-tertiary)' },
-    { label: { id: 'PROYEK', en: 'PROJECTS' }, value: '20+', unit: { id: 'SELESAI', en: 'DONE' }, color: 'var(--accent-color)' },
+    { label: { id: 'PROYEK', en: 'PROJECTS' }, value: '12+', unit: { id: 'SELESAI', en: 'DONE' }, color: 'var(--accent-color)' },
     { label: { id: 'SERTIFIKAT', en: 'CERTIFIED' }, value: 'BNSP', unit: { id: 'NASIONAL', en: 'NATIONAL' }, color: 'var(--accent-secondary)' },
   ];
 
@@ -34,43 +52,30 @@ export default function HeroIntro() {
   };
 
   return (
-    /* Full-viewport centering wrapper */
-    <div style={{
-      width: '100%',
-      height: '100dvh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 'clamp(1rem, 4vw, 3rem) clamp(1rem, 6vw, 6rem)',
-      boxSizing: 'border-box',
-      overflow: 'hidden',
-      position: 'relative',
-    }}>
-      {/* Section background */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        backgroundImage: 'url(/assets/bg/bg_hero.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center top',
-        opacity: 0.12,
-        mixBlendMode: 'screen',
-        pointerEvents: 'none',
-        maskImage: 'radial-gradient(ellipse 80% 90% at 50% 50%, black 30%, transparent 100%)',
-        WebkitMaskImage: 'radial-gradient(ellipse 80% 90% at 50% 50%, black 30%, transparent 100%)',
-      }} />
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(135deg, rgba(0,242,254,0.04) 0%, transparent 50%, rgba(2,6,23,0.7) 100%)',
-        pointerEvents: 'none',
-      }} />
-      {/* ─── Two-column card ─── */}
+    <>
+      <SectionWrapper
+        bgImage="/assets/bg/bg_hero.png"
+      bgPosition="center top"
+      bgOpacity={0.12}
+      bgMask="radial-gradient(ellipse 80% 90% at 50% 50%, black 30%, transparent 100%)"
+      glow={
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(135deg, rgba(0,242,254,0.04) 0%, transparent 50%, rgba(2,6,23,0.7) 100%)',
+          pointerEvents: 'none',
+        }} />
+      }
+      contentStyle={{
+        width: '100%',
+        maxWidth: '1400px',
+      }}
+    >
       <motion.div
         variants={containerVariant}
         initial="hidden"
         animate="show"
         style={{
           width: '100%',
-          maxWidth: '1400px',
           display: 'grid',
           gridTemplateColumns: 'clamp(200px, 38%, 520px) 1fr',
           gap: 'clamp(1.5rem, 4vw, 5rem)',
@@ -198,7 +203,7 @@ export default function HeroIntro() {
                 }}
               >
                 <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-tertiary)', boxShadow: '0 0 10px var(--accent-tertiary)' }} />
-                ACTIVE_LINK
+                OPEN_TO_WORK
               </motion.div>
             </div>
 
@@ -225,8 +230,7 @@ export default function HeroIntro() {
           {/* Location & uptime chips */}
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'center' }}>
             {[
-              { icon: <MapPin size={12} />, text: 'PONTIANAK, BORNEO', color: 'var(--accent-color)' },
-              { icon: <Clock size={12} />, text: '8760h ONLINE', color: 'var(--accent-tertiary)' },
+              { icon: <MapPin size={12} />, text: 'PONTIANAK, INDONESIA', color: 'var(--accent-color)' },
             ].map((chip, i) => (
               <div key={i} style={{
                 display: 'flex', alignItems: 'center', gap: '6px',
@@ -240,6 +244,35 @@ export default function HeroIntro() {
                 fontWeight: 700
               }}>
                 {chip.icon} {chip.text}
+              </div>
+            ))}
+          </div>
+
+          {/* Energy Bars */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', width: '100%', maxWidth: '320px', marginTop: '0.5rem' }}>
+            <div className="hud-tag" style={{ opacity: 0.5, marginBottom: '0.2rem', textAlign: 'center' }}>SYSTEM_DIAGNOSTICS // SKILLS</div>
+            {competencies.map((comp, i) => (
+              <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: comp.color }}>
+                    {comp.icon}
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--text-color)', opacity: 0.8 }}>
+                      {t('label', comp.label)}
+                    </span>
+                  </div>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: comp.color, fontWeight: 700 }}>
+                    {comp.pct}%
+                  </span>
+                </div>
+                <div className="energy-bar-container" style={{ height: '4px', background: 'rgba(255,255,255,0.05)', borderRadius: '2px', overflow: 'hidden' }}>
+                  <motion.div
+                    className="energy-bar-fill"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${comp.pct}%` }}
+                    transition={{ duration: 1.2, delay: 0.4 + i * 0.12, ease: [0.16, 1, 0.3, 1] as any }}
+                    style={{ background: comp.color, color: comp.color, height: '100%' }}
+                  />
+                </div>
               </div>
             ))}
           </div>
@@ -286,7 +319,7 @@ export default function HeroIntro() {
               filter: 'drop-shadow(0 0 30px rgba(0, 242, 254, 0.25))',
               margin: 0,
             }}>
-              ABU<br />RIZA
+              ABU<span style={{ color: 'var(--text-color)' }}>RIZA</span>
             </h1>
           </motion.div>
 
@@ -315,7 +348,7 @@ export default function HeroIntro() {
               opacity: 0.75,
               fontWeight: 300,
               margin: 0,
-              maxWidth: '600px',
+              maxWidth: '900px',
               borderLeft: '2px solid rgba(0,242,254,0.2)',
               paddingLeft: '1.25rem'
             }}>
@@ -382,7 +415,7 @@ export default function HeroIntro() {
               alignItems: 'center'
             }}>
               <span className="hud-tag" style={{ opacity: 0.4, marginRight: '0.5rem', whiteSpace: 'nowrap' }}>STACK://</span>
-              {['Laravel', 'React', 'Node.js', 'Next.js', 'Docker', 'PostgreSQL', 'GIS'].map((tech, i) => (
+              {['Golang', 'Java', '.Net', 'Python', 'PHP', 'Javascript', 'Typescript', 'CSS', 'PostgreSQL', 'MongoDB', 'Docker', 'Kubernetes', 'CI/CD'].map((tech, i) => (
                 <motion.span
                   key={i}
                   whileHover={{ color: 'var(--accent-color)', borderColor: 'var(--accent-color)' }}
@@ -403,28 +436,70 @@ export default function HeroIntro() {
             </div>
           </motion.div>
 
-          {/* CTA Buttons */}
-          <motion.div variants={itemVariant} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <motion.a
-              href="/assets/cv.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cyber-button"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <Shield size={16} /> {t('cv', { id: 'UNDUH CV', en: 'DOWNLOAD CV' })}
-            </motion.a>
-            <motion.a
-              href="#contact"
-              onClick={e => { e.preventDefault(); window.dispatchEvent(new CustomEvent('nav-section', { detail: 'contact' })); }}
-              className="cyber-button"
-              style={{ '--accent-color': 'var(--accent-tertiary)' } as any}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <Zap size={16} /> {t('contact', { id: 'HUBUNGI SAYA', en: 'CONNECT NODE' })}
-            </motion.a>
+          {/* Creds & Contact Buttons */}
+          <motion.div variants={itemVariant} style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: '0.5rem', maxWidth: '500px' }}>
+            <div className="hud-tag" style={{ opacity: 0.5, marginBottom: '0.2rem' }}>CREDENTIALS_UPLINK // ACCESS_GRANTED</div>
+            
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.7rem' }}>
+              {creds.map((btn, i) => (
+                <motion.a
+                  key={i}
+                  href={btn.file}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ x: 6, opacity: 1 }}
+                  whileTap={{ scale: 0.97 }}
+                  style={{
+                    flex: '1 1 calc(50% - 0.35rem)',
+                    minWidth: '160px',
+                    display: 'flex', alignItems: 'center', gap: '10px',
+                    padding: '0.65rem 1rem',
+                    border: `1px solid ${btn.accent}30`,
+                    background: `${btn.accent}08`,
+                    color: btn.accent,
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.65rem',
+                    fontWeight: 700,
+                    letterSpacing: '2px',
+                    textTransform: 'uppercase',
+                    textDecoration: 'none',
+                    cursor: 'pointer',
+                    transition: 'all 0.25s ease',
+                    clipPath: 'polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)',
+                    opacity: 0.85
+                  }}
+                >
+                  {btn.icon}
+                  {btn.label}
+                  <span style={{ marginLeft: 'auto', opacity: 0.4, fontSize: '0.6rem' }}>→</span>
+                </motion.a>
+              ))}
+
+              <motion.button
+                onClick={() => setShowContactModal(true)}
+                style={{
+                  flex: '1 1 calc(50% - 0.35rem)',
+                  minWidth: '160px',
+                  display: 'flex', alignItems: 'center', gap: '10px',
+                  padding: '0.65rem 1rem',
+                  border: `1px solid var(--accent-tertiary)`,
+                  background: 'var(--accent-tertiary)',
+                  color: '#000',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.65rem',
+                  fontWeight: 900,
+                  letterSpacing: '2px',
+                  textTransform: 'uppercase',
+                  cursor: 'pointer',
+                  clipPath: 'polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px)',
+                  transition: 'all 0.2s'
+                }}
+                whileHover={{ scale: 1.02, filter: 'brightness(1.2)' }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Zap size={14} /> {t('contact', { id: 'HUBUNGI SAYA', en: 'CONNECT NODE' })}
+              </motion.button>
+            </div>
           </motion.div>
 
           {/* System status footer */}
@@ -448,6 +523,94 @@ export default function HeroIntro() {
           </motion.div>
         </div>
       </motion.div>
-    </div>
+    </SectionWrapper>
+
+      {/* Contact Modal */}
+      <AnimatePresence>
+        {showContactModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: 'fixed', inset: 0,
+              background: 'rgba(0,0,0,0.6)',
+              backdropFilter: 'blur(10px)',
+              zIndex: 9999,
+              display: 'flex', alignItems: 'center', justifyContent: 'center'
+            }}
+            onClick={() => setShowContactModal(false)}
+          >
+            <motion.div
+              className="hud-panel"
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={e => e.stopPropagation()}
+              style={{
+                background: 'rgba(2, 6, 23, 0.98)',
+                padding: '3rem 2.5rem',
+                display: 'flex', flexDirection: 'column', gap: '1.5rem',
+                minWidth: '350px',
+                position: 'relative',
+                boxShadow: '0 0 50px rgba(0, 242, 254, 0.2)'
+              }}
+            >
+              <div className="scan-line" style={{ height: '2px', opacity: 0.5 }} />
+
+              {/* Corner Accents */}
+              <div style={{ position: 'absolute', top: '15px', left: '15px', width: '15px', height: '15px', borderTop: '2px solid var(--accent-color)', borderLeft: '2px solid var(--accent-color)' }} />
+              <div style={{ position: 'absolute', bottom: '15px', right: '15px', width: '15px', height: '15px', borderBottom: '2px solid var(--accent-color)', borderRight: '2px solid var(--accent-color)' }} />
+
+              <button
+                onClick={() => setShowContactModal(false)}
+                style={{
+                  position: 'absolute', top: '20px', right: '20px',
+                  background: 'rgba(0, 242, 254, 0.1)', border: '1px solid var(--accent-color)',
+                  color: 'var(--accent-color)', cursor: 'pointer',
+                  width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  borderRadius: '6px', transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                }}
+                onMouseOver={e => { e.currentTarget.style.background = 'var(--accent-color)'; e.currentTarget.style.color = '#000'; e.currentTarget.style.boxShadow = '0 0 20px var(--accent-color)'; }}
+                onMouseOut={e => { e.currentTarget.style.background = 'rgba(0, 242, 254, 0.1)'; e.currentTarget.style.color = 'var(--accent-color)'; e.currentTarget.style.boxShadow = 'none'; }}
+              >
+                <X size={20} />
+              </button>
+
+              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.5rem' }}>
+                <div className="hud-tag" style={{ color: 'var(--accent-color)', letterSpacing: '4px' }}>SYS_COMMS_UPLINK</div>
+                <h3 style={{ fontFamily: 'var(--font-header)', margin: 0, color: 'var(--text-color)', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
+                  {t('contact_method', { id: 'Pilih Jalur', en: 'Select Channel' })}
+                </h3>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginTop: '1.5rem' }}>
+                <motion.a
+                  href="https://wa.me/628989825205"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cyber-button"
+                  style={{ '--accent-color': '#25D366', justifyContent: 'center', padding: '1.2rem', fontSize: '0.95rem' } as any}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <MessageSquare size={20} /> WHATSAPP
+                </motion.a>
+
+                <motion.a
+                  href="mailto:aburiza.21@gmail.com"
+                  className="cyber-button"
+                  style={{ '--accent-color': '#ea4335', justifyContent: 'center', padding: '1.2rem', fontSize: '0.95rem' } as any}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Mail size={20} /> EMAIL
+                </motion.a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

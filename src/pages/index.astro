@@ -9,19 +9,26 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Abu Riza | Borneo Digital Rimba</title>
-    <meta
-      name="description"
-      content="Portfolio of Abu Riza - Full Stack Developer at Borneo Digital Rimba"
-    />
+    <title>Abu Riza</title>
+    <meta name="description" content="Abu Riza - Full Stack Developer" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
     <!-- 3D Background Layer -->
-    <div class="three-canvas-wrapper" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
+    <div
+      class="three-canvas-wrapper"
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: -1,
+      }}
+    >
       <ThreeCanvas client:only="react" />
     </div>
 

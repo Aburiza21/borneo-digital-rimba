@@ -8,13 +8,8 @@ export default function HeroAbout() {
   const { t } = useLanguage();
 
   const content = {
-    title: { id: 'Sang Arsitek', en: 'The Architect' },
-    subtitle: { id: 'CLASSIFIED // ARCHIVE_DATA_042', en: 'CLASSIFIED // ARCHIVE_DATA_042' },
-    role: { id: 'Technical Lead & Full Stack Engineer', en: 'Technical Lead & Full Stack Engineer' },
-    bio: {
-      id: 'Full-Stack Developer berpengalaman lebih dari 4 tahun dengan rekam jejak sebagai Technical Lead. Ahli dalam memimpin pengembangan solusi yang robust, efisien, dan berorientasi pada pengalaman pengguna — dari arsitektur sistem hingga implementasi end-to-end.',
-      en: 'Full-Stack Developer with over 4 years of experience and a proven track record as a Technical Lead. Expert in leading the development of robust, efficient, and user-centric solutions — from system architecture to end-to-end implementation.'
-    },
+    title: { id: 'Keahlian Inti', en: 'Core Matrix' },
+    subtitle: { id: 'SYSTEM_DIAGNOSTICS // SKILLS', en: 'SYSTEM_DIAGNOSTICS // SKILLS' },
     cv: { id: 'UNDUH CV', en: 'DOWNLOAD CV' },
     portfolio: { id: 'PORTOFOLIO PDF', en: 'PORTFOLIO PDF' },
     cert: { id: 'SERTIFIKAT BNSP', en: 'BNSP CERTIFICATE' }
@@ -101,39 +96,10 @@ export default function HeroAbout() {
             </h1>
           </motion.div>
 
-          {/* Role subtitle */}
-          <motion.div {...fadeUp(0.15)} style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div style={{ width: '36px', height: '2px', background: 'var(--accent-secondary)', flexShrink: 0 }} />
-            <span style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(0.65rem, 1.4vw, 0.9rem)',
-              color: 'var(--accent-secondary)',
-              letterSpacing: '0.3em',
-              textTransform: 'uppercase',
-              opacity: 0.9
-            }}>
-              {t('role', content.role)}
-            </span>
-          </motion.div>
-
           {/* Dayak divider */}
-          <motion.div {...fadeUp(0.2)} style={{ opacity: 0.4, maxWidth: '400px' }}>
+          <motion.div {...fadeUp(0.2)} style={{ opacity: 0.4, maxWidth: '400px', marginBottom: '1.5rem' }}>
             <DayakMotifs.MandauDivider color="var(--accent-secondary)" />
           </motion.div>
-
-          {/* Bio paragraph */}
-          <motion.p {...fadeUp(0.25)} style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 'clamp(0.9rem, 1.5vw, 1.15rem)',
-            lineHeight: 1.9,
-            color: 'var(--text-color)',
-            opacity: 0.75,
-            fontWeight: 300,
-            margin: 0,
-            maxWidth: '680px',
-          }}>
-            {t('bio', content.bio)}
-          </motion.p>
 
           {/* Competency bars */}
           <motion.div {...fadeUp(0.32)} style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem', maxWidth: '560px' }}>

@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal, Cpu, Users, Zap, ChevronRight, CheckCircle2, Code2 } from 'lucide-react';
+import { Layers, Database, Smartphone, GitMerge, Server, Headset, ChevronRight, Activity, Zap, Code2, Layout, CheckCircle2 } from 'lucide-react';
 import { DayakMotifs } from './DayakMotifs';
 import { useLanguage } from './LanguageContext';
+import SectionWrapper from './SectionWrapper';
 
 interface ServicesProps {
   activeStep?: number;
@@ -10,50 +11,98 @@ interface ServicesProps {
 
 const servicesData = [
   {
-    id: 'CAP-LEA-01',
-    icon: Users,
-    title: { id: 'Leadership & Arsitektur', en: 'Leadership & Architecture' },
-    description: {
-      id: 'Memastikan integritas teknis melalui kepemimpinan tim, manajemen proyek Agile, dan perancangan arsitektur sistem yang robust dan scalable.',
-      en: 'Ensuring technical integrity through team leadership, Agile project management, and designing robust, scalable system architectures.',
-    },
-    skills: ['Team Leadership', 'Agile / Scrum', 'System Design', 'Code Review', 'Tech Mentoring', 'Sprint Planning'],
-    metrics: [
-      { label: { id: 'Tim Dipimpin', en: 'Teams Led' }, value: '3+' },
-      { label: { id: 'Proyek Agile', en: 'Agile Projects' }, value: '6+' },
-      { label: { id: 'Anggota Tim', en: 'Team Members' }, value: '10+' },
-    ],
-    color: 'var(--accent-tertiary)',
-  },
-  {
-    id: 'CAP-FS-02',
-    icon: Terminal,
+    id: 'CAP-FS-01',
+    icon: Code2,
     title: { id: 'Full Stack Engineering', en: 'Full Stack Engineering' },
     description: {
-      id: 'Membangun solusi end-to-end menggunakan Laravel, Node.js, React, dan Next.js dengan fokus pada performa, skalabilitas, dan pengalaman pengguna optimal.',
-      en: 'Crafting end-to-end solutions using Laravel, Node.js, React, and Next.js with focus on performance, scalability, and optimal user experience.',
+      id: 'Membangun aplikasi utuh dari antarmuka pengguna hingga sistem arsitektur belakang yang skalabel dan efisien.',
+      en: 'Building complete applications from user interfaces to scalable and efficient backend system architectures.',
     },
-    skills: ['Laravel', 'React / Next.js', 'Node.js', 'PostgreSQL', 'Docker', 'REST / GraphQL'],
+    skills: ['Laravel', 'Next.js', 'React', 'Node.js', 'API Design', 'System Architecture'],
     metrics: [
-      { label: { id: 'Tahun Pengalaman', en: 'Years Experience' }, value: '4+' },
-      { label: { id: 'Aplikasi Dibangun', en: 'Apps Built' }, value: '20+' },
-      { label: { id: 'Baris Kode', en: 'Lines of Code' }, value: '100K+' },
+      { label: { id: 'Pengalaman', en: 'Experience' }, value: '4+ th' },
+      { label: { id: 'Proyek Selesai', en: 'Projects' }, value: '20+' },
+      { label: { id: 'Solusi End-to-End', en: 'E2E Solutions' }, value: '100%' },
     ],
     color: 'var(--accent-color)',
   },
   {
-    id: 'CAP-SYS-03',
-    icon: Cpu,
-    title: { id: 'Sistem Spesialis', en: 'Specialized Systems' },
+    id: 'CAP-BE-02',
+    icon: Server,
+    title: { id: 'Backend Development', en: 'Backend Development' },
     description: {
-      id: 'Integrasi sistem GIS berbasis Leaflet/PostGIS, implementasi DevOps dengan Docker, serta pengelolaan infrastruktur IT dan dukungan teknis enterprise.',
-      en: 'GIS system integration with Leaflet/PostGIS, DevOps implementation with Docker, and enterprise IT infrastructure management and technical support.',
+      id: 'Pengembangan logika server, pengolahan database kompleks, RESTful API, dan optimasi query dengan performa tinggi.',
+      en: 'Server logic development, complex database processing, RESTful APIs, and high-performance query optimization.',
     },
-    skills: ['GIS / Leaflet', 'PostGIS', 'Docker', 'Linux Server', 'CI/CD', 'System Integration'],
+    skills: ['Golang', 'Python', 'PostgreSQL', 'MySQL', 'gRPC', 'Vector DB'],
     metrics: [
-      { label: { id: 'Sistem GIS', en: 'GIS Systems' }, value: '2' },
-      { label: { id: 'Server Dikelola', en: 'Servers Managed' }, value: '5+' },
-      { label: { id: 'Integrasi API', en: 'API Integrations' }, value: '15+' },
+      { label: { id: 'Query Optimation', en: 'Query Opt' }, value: '99%' },
+      { label: { id: 'API Endpoints', en: 'API Endpoints' }, value: '250+' },
+      { label: { id: 'Keamanan Data', en: 'Data Security' }, value: 'ISO' },
+    ],
+    color: 'var(--accent-tertiary)',
+  },
+  {
+    id: 'CAP-FE-03',
+    icon: Layout,
+    title: { id: 'Frontend Development', en: 'Frontend Development' },
+    description: {
+      id: 'Pembuatan antarmuka pengguna interaktif, responsif, dan estetis dengan framework modern dan styling terkini.',
+      en: 'Creating interactive, responsive, and aesthetic user interfaces with modern frameworks and the latest styling.',
+    },
+    skills: ['React', 'Next.js', 'Tailwind CSS', 'Bootstrap', 'JavaScript / TypeScript', 'jQuery'],
+    metrics: [
+      { label: { id: 'Responsivitas', en: 'Responsive' }, value: '100%' },
+      { label: { id: 'UI/UX Fokus', en: 'UI/UX Focus' }, value: 'High' },
+      { label: { id: 'Performa Layar', en: 'Screen Perf' }, value: 'A+' },
+    ],
+    color: 'var(--accent-secondary)',
+  },
+  {
+    id: 'CAP-MOB-04',
+    icon: Smartphone,
+    title: { id: 'Mobile Development', en: 'Mobile Development' },
+    description: {
+      id: 'Pengembangan aplikasi mobile cross-platform yang native-like, performa mulus, dan integrasi API yang lancar.',
+      en: 'Development of cross-platform mobile applications with native-like smooth performance and seamless API integration.',
+    },
+    skills: ['Flutter', 'React Native', 'Dart', 'State Management', 'Mobile UI/UX', 'API Integration'],
+    metrics: [
+      { label: { id: 'Cross-Platform', en: 'Cross-Platform' }, value: 'Yes' },
+      { label: { id: 'Aplikasi Rilis', en: 'Apps Released' }, value: '4+' },
+      { label: { id: 'Native Feel', en: 'Native Feel' }, value: '98%' },
+    ],
+    color: 'var(--accent-color)',
+  },
+  {
+    id: 'CAP-DEV-05',
+    icon: Activity,
+    title: { id: 'DevOps & Server', en: 'DevOps & Server' },
+    description: {
+      id: 'Otomatisasi deployment, manajemen kontainer, konfigurasi server on-premise, serta integrasi CI/CD pipelines.',
+      en: 'Deployment automation, container management, on-premise server configuration, and CI/CD pipeline integration.',
+    },
+    skills: ['Docker', 'CI/CD', 'Linux / SSH', 'VMware ESXi', 'Nginx', 'Server Config'],
+    metrics: [
+      { label: { id: 'Uptime Sistem', en: 'System Uptime' }, value: '99.9%' },
+      { label: { id: 'Pipeline CI/CD', en: 'CI/CD Pipelines' }, value: '15+' },
+      { label: { id: 'Server Dikelola', en: 'Servers Managed' }, value: '10+' },
+    ],
+    color: 'var(--accent-tertiary)',
+  },
+  {
+    id: 'CAP-ITS-06',
+    icon: Headset,
+    title: { id: 'IT Support / Staff', en: 'IT Support & Hardware' },
+    description: {
+      id: 'Pemeliharaan perangkat keras, jaringan komputer, penyelesaian masalah teknis tingkat lanjut, dan operasional harian.',
+      en: 'Hardware maintenance, computer networking, advanced technical troubleshooting, and daily operations.',
+    },
+    skills: ['Troubleshooting', 'Networking / TCP/IP', 'Mikrotik', 'Hardware Repair', 'Helpdesk', 'Technical Docs'],
+    metrics: [
+      { label: { id: 'Kasus Selesai', en: 'Cases Solved' }, value: '1K+' },
+      { label: { id: 'Respon Teknis', en: 'Tech Response' }, value: 'Fast' },
+      { label: { id: 'Kepuasan User', en: 'User Satisfaction' }, value: '98%' },
     ],
     color: 'var(--accent-secondary)',
   },
@@ -65,10 +114,7 @@ export default function Services({ activeStep = 0 }: ServicesProps) {
   const svc = servicesData[activeStep] ?? servicesData[0];
   const Icon = svc.icon;
 
-  const labels = {
-    heading: { id: 'INTI_OPERASIONAL_NEURAL', en: 'NEURAL_OPERATIONAL_CORE' },
-    title: { id: 'Node Kemampuan', en: 'Capabilities Matrix' },
-  };
+
 
   const fadeUp = (delay = 0) => ({
     initial: { opacity: 0, y: 24 },
@@ -77,65 +123,37 @@ export default function Services({ activeStep = 0 }: ServicesProps) {
   });
 
   return (
-    <div style={{
-      width: '100%',
-      height: '100dvh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 'clamp(1rem, 4vw, 2.5rem) clamp(1rem, 6vw, 6rem)',
-      boxSizing: 'border-box',
-      overflow: 'hidden',
-      position: 'relative',
-    }}>
-
-      {/* Ambient glow */}
-      <motion.div
-        animate={{ opacity: [0.05, 0.12, 0.05] }}
-        transition={{ repeat: Infinity, duration: 5 }}
-        style={{
-          position: 'absolute',
-          top: '-10%', right: '10%',
-          width: '700px', height: '700px',
-          background: `radial-gradient(circle, ${svc.color} 0%, transparent 65%)`,
-          filter: 'blur(100px)',
-          pointerEvents: 'none', zIndex: 0,
-          transition: 'background 0.8s ease',
-        }}
-      />
-
-      {/* Section background */}
-      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/assets/bg/bg_services.png)', backgroundSize: 'cover', backgroundPosition: 'center right', opacity: 0.08, mixBlendMode: 'screen', pointerEvents: 'none', maskImage: 'linear-gradient(to left, black 0%, rgba(0,0,0,0.4) 55%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to left, black 0%, rgba(0,0,0,0.4) 55%, transparent 100%)' }} />
-
-      <div style={{
-        maxWidth: '1400px',
-        width: '100%',
+    <SectionWrapper
+      bgImage="/assets/bg/bg_services.png"
+      bgPosition="center right"
+      bgMask="linear-gradient(to left, black 0%, rgba(0,0,0,0.4) 55%, transparent 100%)"
+      glow={
+        <motion.div
+          animate={{ opacity: [0.05, 0.12, 0.05] }}
+          transition={{ repeat: Infinity, duration: 5 }}
+          style={{
+            position: 'absolute',
+            top: '-10%', right: '10%',
+            width: '700px', height: '700px',
+            background: `radial-gradient(circle, ${svc.color} 0%, transparent 65%)`,
+            filter: 'blur(100px)',
+            pointerEvents: 'none', zIndex: 0,
+            transition: 'background 0.8s ease',
+          }}
+        />
+      }
+      contentStyle={{
         display: 'grid',
         gridTemplateColumns: '1fr clamp(280px, 38%, 500px)',
         gap: 'clamp(2rem, 5vw, 6rem)',
         alignItems: 'center',
-        position: 'relative',
-        zIndex: 1,
-      }}>
+      }}
+    >
 
         {/* ──────────── LEFT: Active Capability Spotlight ──────────── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(1rem, 2.5vh, 1.8rem)' }}>
 
-          {/* Section header */}
-          <motion.div {...fadeUp(0)}>
-            <div className="tribal-heading" style={{ marginBottom: '0.4rem' }}>
-              {t('heading', labels.heading)}
-            </div>
-            <h2 className="section-title" style={{
-              color: svc.color,
-              fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
-              margin: 0,
-              transition: 'color 0.5s ease',
-              textShadow: `0 0 30px ${svc.color}50`,
-            }}>
-              {t('title', labels.title)}
-            </h2>
-          </motion.div>
+
 
           {/* Active capability detail — crossfade on step change */}
           <AnimatePresence mode="wait">
@@ -407,7 +425,6 @@ export default function Services({ activeStep = 0 }: ServicesProps) {
             <DayakMotifs.AncientSeal size={80} />
           </div>
         </motion.div>
-      </div>
-    </div>
+    </SectionWrapper>
   );
 }

@@ -9,9 +9,10 @@ import { DayakMotifs } from './DayakMotifs';
 
 /* ─── Theme Toggle (inline, no fixed positioning) ─── */
 function ThemeBtn() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   useEffect(() => {
-    setIsDark(document.documentElement.getAttribute('data-theme') === 'dark');
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    setIsDark(currentTheme !== 'light');
   }, []);
   const toggle = () => {
     const next = isDark ? 'light' : 'dark';
@@ -82,13 +83,12 @@ function NavBtn() {
   const [isOpen, setIsOpen] = useState(false);
 
   const sections = [
-    { id: 'hero',       label: { id: 'BERANDA',    en: 'INTRO'        }, tech: 'DATA_STREAM_01'       },
-    { id: 'about',      label: { id: 'TENTANG',    en: 'ABOUT'        }, tech: 'IDENTITY_NODE_02'     },
-    { id: 'experience', label: { id: 'PENGALAMAN', en: 'EXPERIENCE'   }, tech: 'EVOLUTION_LOGS_03'    },
-    { id: 'education',  label: { id: 'PENDIDIKAN', en: 'EDUCATION'    }, tech: 'HISTORY_LAYER_04'     },
-    { id: 'services',   label: { id: 'KEAHLIAN',  en: 'CAPABILITIES' }, tech: 'CAPABILITY_SYNC_05'   },
-    { id: 'portfolio',  label: { id: 'PORTOFOLIO', en: 'PORTFOLIO'    }, tech: 'RELIQUARY_ARCHIVE_06' },
-    { id: 'contact',    label: { id: 'KONTAK',     en: 'CONTACT'      }, tech: 'UPLINK_TERMINAL_07'   },
+    { id: 'hero', label: { id: 'BERANDA', en: 'INTRO' }, tech: 'DATA_STREAM_01' },
+    { id: 'experience', label: { id: 'PENGALAMAN', en: 'EXPERIENCE' }, tech: 'EVOLUTION_LOGS_02' },
+    { id: 'education', label: { id: 'PENDIDIKAN', en: 'EDUCATION' }, tech: 'HISTORY_LAYER_04' },
+    { id: 'services', label: { id: 'KEAHLIAN', en: 'CAPABILITIES' }, tech: 'CAPABILITY_SYNC_05' },
+    { id: 'portfolio', label: { id: 'PORTOFOLIO', en: 'PORTFOLIO' }, tech: 'RELIQUARY_ARCHIVE_06' },
+    { id: 'contact', label: { id: 'KONTAK', en: 'CONTACT' }, tech: 'UPLINK_TERMINAL_07' },
   ];
 
   const scrollTo = (id: string) => {
@@ -153,7 +153,7 @@ function NavBtn() {
               </div>
 
               <div className="hud-tag" style={{ marginBottom: '1rem', opacity: 0.5 }}>
-                NAVIGATION_ARRAY // RIMBA_PROTOCOL
+                NAVIGATION_ARRAY
               </div>
 
               {sections.map((sec, idx) => (

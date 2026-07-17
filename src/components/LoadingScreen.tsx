@@ -7,13 +7,13 @@ interface LoadingScreenProps {
 }
 
 const PHASES = [
-  { pct: 0,   msg: 'BOOT_SEQUENCE_INITIALIZNG',     sub: 'Memuat inti sistem Borneo Matrix...',          subEn: 'Loading Borneo Matrix system core...' },
-  { pct: 18,  msg: 'NEURAL_PATHWAYS_CALIBRATING',   sub: 'Mengkalibrasi jalur neural leluhur...',        subEn: 'Calibrating ancestral neural pathways...' },
-  { pct: 36,  msg: 'DAYAK_CIPHER_DECRYPTING',       sub: 'Mendekripsi sandi Dayak kuno...',              subEn: 'Decrypting ancient Dayak ciphers...' },
-  { pct: 52,  msg: 'RAINFOREST_NODES_SYNCING',      sub: 'Menyinkronkan simpul rimba digital...',        subEn: 'Syncing digital rainforest nodes...' },
-  { pct: 68,  msg: 'ANCESTRAL_DATA_RESTORING',      sub: 'Memulihkan arsip data leluhur...',             subEn: 'Restoring ancestral data archives...' },
-  { pct: 82,  msg: 'CIVILIZATION_REASSEMBLING',     sub: 'Menyusun ulang peradaban digital...',          subEn: 'Reassembling the digital civilization...' },
-  { pct: 94,  msg: 'SYSTEM_INTEGRITY_VERIFIED',     sub: 'Verifikasi integritas sistem selesai...',      subEn: 'System integrity verification complete...' },
+  { pct: 0, msg: 'BOOT_SEQUENCE_INITIALIZNG', sub: 'Memuat inti sistem Borneo Matrix...', subEn: 'Loading Borneo Matrix system core...' },
+  { pct: 18, msg: 'NEURAL_PATHWAYS_CALIBRATING', sub: 'Mengkalibrasi jalur neural leluhur...', subEn: 'Calibrating ancestral neural pathways...' },
+  { pct: 36, msg: 'DAYAK_CIPHER_DECRYPTING', sub: 'Mendekripsi sandi Dayak kuno...', subEn: 'Decrypting ancient Dayak ciphers...' },
+  { pct: 52, msg: 'RAINFOREST_NODES_SYNCING', sub: 'Menyinkronkan simpul rimba digital...', subEn: 'Syncing digital rainforest nodes...' },
+  { pct: 68, msg: 'ANCESTRAL_DATA_RESTORING', sub: 'Memulihkan arsip data leluhur...', subEn: 'Restoring ancestral data archives...' },
+  { pct: 82, msg: 'CIVILIZATION_REASSEMBLING', sub: 'Menyusun ulang peradaban digital...', subEn: 'Reassembling the digital civilization...' },
+  { pct: 94, msg: 'SYSTEM_INTEGRITY_VERIFIED', sub: 'Verifikasi integritas sistem selesai...', subEn: 'System integrity verification complete...' },
   { pct: 100, msg: 'RIMBA_ONLINE // SIAP_BERTEMPUR', sub: 'Peradaban telah dipulihkan. Selamat datang.', subEn: 'Civilization restored. Welcome back.' },
 ];
 
@@ -122,8 +122,8 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
 
           {/* Corner accents */}
           {[
-            { top: 20,  left: 20,  deg: 0   },
-            { top: 20,  right: 20, deg: 90  },
+            { top: 20, left: 20, deg: 0 },
+            { top: 20, right: 20, deg: 90 },
             { bottom: 20, right: 20, deg: 180 },
             { bottom: 20, left: 20, deg: 270 },
           ].map((pos, i) => {
@@ -195,16 +195,6 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
               transition={{ duration: 0.1 }}
               style={{ textAlign: 'center' }}
             >
-              <div style={{
-                fontSize: 'clamp(0.6rem, 2vw, 0.85rem)',
-                letterSpacing: '8px',
-                color: 'var(--accent-color)',
-                opacity: 0.6,
-                marginBottom: '0.6rem',
-                textTransform: 'uppercase',
-              }}>
-                ᚛ BORNEO DIGITAL RIMBA ᚜
-              </div>
               <h1 style={{
                 fontFamily: 'var(--font-header)',
                 fontSize: 'clamp(1.4rem, 4vw, 2.5rem)',
@@ -220,7 +210,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
                 filter: 'drop-shadow(0 0 20px rgba(0,242,254,0.3))',
                 lineHeight: 1.1,
               }}>
-                MENYUSUN ULANG<br />PERADABAN
+                LOADING
               </h1>
             </motion.div>
 
@@ -310,7 +300,7 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
             fontSize: '0.55rem', color: 'rgba(255,255,255,0.2)', letterSpacing: '3px',
             fontFamily: 'var(--font-mono)', whiteSpace: 'nowrap', zIndex: 2,
           }}>
-            BORNEO_MATRIX_NODE_05 // ABU-RIZA-001 // V4.2.0
+            MATRIX_NODE_05 // ABU-RIZA-001 // V4.2.0
           </div>
         </motion.div>
       )}

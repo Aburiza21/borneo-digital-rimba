@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GraduationCap, BookOpen, Award, Calendar, Star, ChevronRight } from 'lucide-react';
+import { MapPin, Calendar, Award, ExternalLink, ChevronRight, FileText, CheckCircle2, GraduationCap, BookOpen, Star } from 'lucide-react';
 import { DayakMotifs } from './DayakMotifs';
 import { useLanguage } from './LanguageContext';
+import SectionWrapper from './SectionWrapper';
 
 interface EducationProps {
   activeStep?: number;
@@ -22,6 +23,7 @@ const educationData = [
       id: 'Implementasi Metode K-Means Clustering & Cosine Similarity untuk pengklasifikasian data skripsi.',
       en: 'Implementation of K-Means Clustering & Cosine Similarity for academic thesis data classification.',
     },
+    url: 'https://jurnal.untan.ac.id/index.php/JUARA/article/view/73974',
     highlights: [
       { id: 'IPK 3,51 / 4,00', en: 'GPA 3.51 / 4.00' },
       { id: 'Lulus dengan Predikat Memuaskan', en: 'Graduated with Honors' },
@@ -58,77 +60,38 @@ export default function Education({ activeStep = 0 }: EducationProps) {
 
   const edu = educationData[activeStep] ?? educationData[0];
 
-  const labels = {
-    heading: { id: 'SIMPUL: PENDIDIKAN_LELUHUR', en: 'NODES: ANCESTRAL_EDUCATION' },
-    title: { id: 'Sinkronisasi Leluhur', en: 'Ancestral Sync' },
-  };
+
 
   return (
-    <div style={{
-      width: '100%',
-      height: '100dvh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: 'clamp(1rem, 4vw, 2.5rem) clamp(1rem, 6vw, 6rem)',
-      boxSizing: 'border-box',
-      overflow: 'hidden',
-      position: 'relative',
-    }}>
-
-      {/* Ambient glow */}
-      <motion.div
-        animate={{ opacity: [0.05, 0.12, 0.05] }}
-        transition={{ repeat: Infinity, duration: 5 }}
-        style={{
-          position: 'absolute',
-          bottom: '-20%', left: '5%',
-          width: '650px', height: '650px',
-          background: `radial-gradient(circle, ${edu.color} 0%, transparent 65%)`,
-          filter: 'blur(100px)',
-          pointerEvents: 'none', zIndex: 0,
-          transition: 'background 0.8s ease',
-        }}
-      />
-
-      {/* Section background */}
-      <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/assets/bg/bg_education.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.09, mixBlendMode: 'screen', pointerEvents: 'none', maskImage: 'radial-gradient(ellipse 75% 80% at 50% 50%, black 20%, transparent 100%)', WebkitMaskImage: 'radial-gradient(ellipse 75% 80% at 50% 50%, black 20%, transparent 100%)' }} />
-
-      <div style={{
-        maxWidth: '1400px',
-        width: '100%',
+    <SectionWrapper
+      bgImage="/assets/bg/bg_education.png"
+      bgMask="radial-gradient(ellipse 75% 80% at 50% 50%, black 20%, transparent 100%)"
+      glow={
+        <motion.div
+          animate={{ opacity: [0.05, 0.12, 0.05] }}
+          transition={{ repeat: Infinity, duration: 5 }}
+          style={{
+            position: 'absolute',
+            bottom: '-20%', left: '5%',
+            width: '650px', height: '650px',
+            background: `radial-gradient(circle, ${edu.color} 0%, transparent 65%)`,
+            filter: 'blur(100px)',
+            pointerEvents: 'none', zIndex: 0,
+            transition: 'background 0.8s ease',
+          }}
+        />
+      }
+      contentStyle={{
         display: 'grid',
         gridTemplateColumns: '1fr clamp(260px, 36%, 480px)',
         gap: 'clamp(2rem, 5vw, 6rem)',
         alignItems: 'center',
-        position: 'relative',
-        zIndex: 1,
-      }}>
+      }}
+    >
 
         {/* ──────────── LEFT: Active Education Spotlight ──────────── */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(1rem, 2.5vh, 1.8rem)' }}>
 
-          {/* Section header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="tribal-heading" style={{ marginBottom: '0.4rem' }}>
-              {t('heading', labels.heading)}
-            </div>
-            <h2 className="section-title" style={{
-              color: edu.color,
-              fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
-              margin: 0,
-              display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap',
-              transition: 'color 0.5s ease',
-              textShadow: `0 0 30px ${edu.color}50`,
-            }}>
-              <GraduationCap size={36} />
-              {t('title', labels.title)}
-            </h2>
-          </motion.div>
 
           {/* Active education detail — crossfade on step change */}
           <AnimatePresence mode="wait">
@@ -438,6 +401,49 @@ export default function Education({ activeStep = 0 }: EducationProps) {
             );
           })}
 
+          {/* External Link (Journal/Portfolio) if exists */}
+          <AnimatePresence>
+            {edu.url && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                style={{ marginTop: 'clamp(1rem, 2vh, 1.5rem)', paddingLeft: '56px', overflow: 'hidden' }}
+              >
+                <div className="hud-tag" style={{ opacity: 0.4, fontSize: '0.58rem', marginBottom: '0.6rem', letterSpacing: '2px' }}>
+                  EXTERNAL_LINK // PUBLICATION
+                </div>
+                <motion.a
+                  href={edu.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02, x: 5, backgroundColor: `${edu.color}15` }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: '12px',
+                    padding: '0.75rem 1.2rem',
+                    border: `1px solid ${edu.color}50`,
+                    background: `${edu.color}0a`,
+                    color: edu.color,
+                    textDecoration: 'none',
+                    clipPath: 'polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)',
+                    transition: 'all 0.3s ease'
+                  }}
+                >
+                  <BookOpen size={18} />
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ fontFamily: 'var(--font-header)', fontSize: '0.85rem', fontWeight: 900, letterSpacing: '1px' }}>
+                      {t('view_journal', { id: 'LIHAT JURNAL', en: 'VIEW JOURNAL' })}
+                    </span>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.55rem', opacity: 0.7, letterSpacing: '1px' }}>
+                      ACCESS_PUBLICATION →
+                    </span>
+                  </div>
+                </motion.a>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           {/* Bottom: Dayak watermark */}
           <div style={{
             marginTop: 'clamp(1.5rem, 3vh, 2.5rem)',
@@ -446,14 +452,13 @@ export default function Education({ activeStep = 0 }: EducationProps) {
           }}>
             {/* Mandau divider */}
             <div style={{ opacity: 0.3 }}>
-              <DayakMotifs.MandauDivider color="var(--accent-color)" />
+              <DayakMotifs.MandauDivider color={edu.color} />
             </div>
             <div className="hud-tag" style={{ opacity: 0.25, fontSize: '0.58rem', letterSpacing: '2px' }}>
               BORNEO_MATRIX // EDUCATION_ARCHIVE_COMPLETE
             </div>
           </div>
         </motion.div>
-      </div>
-    </div>
+    </SectionWrapper>
   );
 }

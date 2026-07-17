@@ -5,6 +5,7 @@ import {
   Calendar, ChevronRight, Home, MapPin, ExternalLink, Archive
 } from 'lucide-react';
 import { DayakMotifs } from './DayakMotifs';
+import SectionWrapper from './SectionWrapper';
 
 /* ─── Types ─── */
 type EventType = 'work' | 'education' | 'achievement' | 'project';
@@ -28,45 +29,81 @@ interface TimelineEvent {
 /* ─── Data ─── */
 const events: TimelineEvent[] = [
   {
-    id: 'TL-2025A',
+    id: 'TL-2025B',
     type: 'work',
     year: '2025',
     duration: 'Present',
+    title: 'Full Stack Developer',
+    organization: 'KALANARA GROUP (PT Kalanara Group Indonesia)',
+    location: 'Indonesia',
+    description: 'Merancang dan mengembangkan aplikasi untuk meningkatkan efisiensi operasional. Memberikan dukungan teknis kepada pengguna dan menyiapkan infrastruktur teknis sebagai fondasi awal proyek.',
+    highlights: [
+      'Pengembangan & troubleshooting aplikasi',
+      'Dukungan teknis responsif',
+      'Persiapan infrastruktur awal proyek',
+      'Manajemen proyek mandiri/tim',
+    ],
+    tech: ['Laravel', 'React', 'PostgreSQL', 'Next.js', 'Golang', 'Python', 'Docker', 'CI/CD', 'AI Integration'],
+    accent: 'var(--accent-color)',
+    isMilestone: true,
+  },
+  {
+    id: 'TL-2025A',
+    type: 'work',
+    year: '2025',
+    duration: '10 Bulan',
     title: 'IT Staff',
     organization: 'RS Mitra Medika (PT Hexa Daya Medika)',
     location: 'Pontianak, Kalimantan Barat',
-    description: 'Memimpin pengembangan aplikasi internal full-stack untuk mengotomasi proses operasional rumah sakit. Bertanggung jawab atas seluruh infrastruktur IT, jaringan, server, dan sistem.',
+    description: 'Memimpin pengembangan aplikasi internal full-stack untuk mengotomasi proses operasional rumah sakit. Bertanggung jawab atas pemeliharaan dan peningkatan infrastruktur IT secara menyeluruh.',
     highlights: [
-      'Membangun Hospital Information System (HIS) dengan 60+ modul',
-      'Integrasi SATUSEHAT — Kementerian Kesehatan RI',
-      'Pengelolaan infrastruktur IT & jaringan seluruh rumah sakit',
-      'Supervisor teknis tim developer internal',
+      'Otomatisasi proses operasional RS',
+      'Troubleshooting & maintenance infrastruktur',
+      'Pengelolaan sistem, jaringan & hardware',
+      'Penyusunan dokumentasi teknis',
     ],
-    tech: ['Laravel', 'Inertia.js', 'React', 'SQLite', 'Docker', 'SATUSEHAT API'],
-    accent: 'var(--accent-color)',
+    tech: ['Laravel', 'React', 'Flutter', 'IT Support', 'VMware ESXi', 'Mikrotik', 'VPN'],
+    accent: 'var(--accent-tertiary)',
     isMilestone: true,
   },
   {
     id: 'TL-2024A',
     type: 'work',
     year: '2024',
-    duration: '2025',
+    duration: '8 Bulan',
     title: 'Technical Lead',
     organization: 'Reactive Incorporated (PT Sepakat Digital)',
     location: 'Pontianak, Kalimantan Barat',
-    description: 'Memimpin dan memberdayakan tim produksi melalui analisis kinerja rutin. Merancang arsitektur dan pondasi teknis untuk berbagai proyek baru serta mengelola siklus hidup proyek end-to-end.',
+    description: 'Memimpin tim produksi melalui analisis kinerja rutin untuk meningkatkan efisiensi. Merancang arsitektur dan pondasi teknis untuk proyek baru serta mengelola siklus hidup proyek end-to-end.',
     highlights: [
-      'Memimpin tim 4–6 developer dalam 3 proyek enterprise',
-      'Merancang arsitektur sistem untuk 3 platform baru',
-      'Sprint management, code review, & mentoring',
-      'Pengiriman tepat waktu dengan Zero critical bugs',
+      'Peningkatan produktivitas tim',
+      'Perancangan arsitektur sistem baru',
+      'Manajemen siklus proyek end-to-end',
+      'Pemenuhan standar kualitas & waktu',
     ],
-    tech: ['Laravel', 'React', 'Node.js', 'PostgreSQL', 'Docker', 'Scrum'],
-    accent: 'var(--accent-tertiary)',
+    tech: ['Laravel', 'React', 'MySQL', 'DevOps', 'Tailwind CSS'],
+    accent: 'var(--accent-secondary)',
     isMilestone: true,
   },
   {
     id: 'TL-2024B',
+    type: 'work',
+    year: '2024',
+    duration: '4 Bulan',
+    title: 'Backend Developer',
+    organization: 'Impach Solusi Digital (PT Solusi Digital)',
+    location: 'Indonesia',
+    description: 'Merancang dan mengembangkan REST-API andal berkinerja tinggi untuk aplikasi multi-platform. Membangun struktur database efisien dengan menerapkan monitoring ketat dan kontrol kualitas.',
+    highlights: [
+      'Pengembangan REST-API multi-platform',
+      'Optimasi database & struktur data',
+      'Implementasi keamanan & privasi data',
+    ],
+    tech: ['Laravel', 'CodeIgniter', 'PHP', 'MySQL', 'REST API'],
+    accent: 'var(--accent-color)',
+  },
+  {
+    id: 'TL-PROJ-01',
     type: 'project',
     year: '2024',
     title: 'Reactive POS — Enterprise Kasir',
@@ -90,16 +127,17 @@ const events: TimelineEvent[] = [
     id: 'TL-2023B',
     type: 'education',
     year: '2023',
-    title: 'Sarjana Teknik Informatika',
+    duration: '2016',
+    title: 'Sarjana Teknik Informatika (S1)',
     organization: 'Universitas Tanjungpura (UNTAN)',
     location: 'Pontianak, Kalimantan Barat',
-    description: 'Lulus dengan predikat Memuaskan. Skripsi membahas implementasi metode K-Means Clustering dan Cosine Similarity untuk klasifikasi dan rekomendasi topik skripsi.',
+    description: 'Lulus dengan predikat Memuaskan. Skripsi: Implementasi Metode K-Means Clustering & Cosine Similarity untuk pengklasifikasian data skripsi.',
     highlights: [
       'IPK 3.51 / 4.00 — Predikat Memuaskan',
-      'Skripsi: K-Means Clustering & Cosine Similarity',
       'Fokus: Data Mining & Machine Learning',
     ],
     tech: ['Python', 'Scikit-learn', 'NLTK', 'Pandas'],
+    link: 'https://jurnal.untan.ac.id/index.php/JUARA/article/view/73974',
     accent: 'var(--accent-color)',
     isMilestone: true,
   },
@@ -137,17 +175,6 @@ const events: TimelineEvent[] = [
     isMilestone: true,
   },
   {
-    id: 'TL-2016A',
-    type: 'education',
-    year: '2016',
-    duration: '2023',
-    title: 'S1 Teknik Informatika',
-    organization: 'Universitas Tanjungpura (UNTAN)',
-    location: 'Pontianak, Kalimantan Barat',
-    description: 'Menempuh pendidikan sarjana selama 7 tahun dengan fokus pada rekayasa perangkat lunak, sistem informasi, dan ilmu data. Aktif dalam pengembangan proyek akademik dan kolaborasi industri.',
-    accent: 'var(--accent-color)',
-  },
-  {
     id: 'TL-2014A',
     type: 'education',
     year: '2014',
@@ -155,11 +182,11 @@ const events: TimelineEvent[] = [
     title: 'Teknik Komputer & Jaringan',
     organization: 'SMK Amaliyah',
     location: 'Kalimantan Barat',
-    description: 'Pendidikan menengah kejuruan dengan fokus pada infrastruktur IT, jaringan komputer, dan troubleshooting sistem. Fondasi karir dalam teknologi informasi.',
+    description: 'Pendidikan Menengah Kejuruan dengan fokus pada infrastruktur IT, jaringan komputer, dan troubleshooting sistem.',
     highlights: [
-      'Keahlian jaringan komputer & troubleshooting',
-      'Fondasi IT infrastructure & sistem operasi',
-      'Awal perjalanan karir teknologi',
+      'Fokus: Infrastruktur IT',
+      'Jaringan Komputer',
+      'Fondasi Karir Teknologi',
     ],
     accent: 'var(--accent-secondary)',
     isMilestone: true,
@@ -389,25 +416,27 @@ export default function TimelinePage() {
   ];
 
   return (
-    <div style={{
-      width: '100vw',
-      height: '100vh',
-      background: 'radial-gradient(ellipse at 40% 20%, rgba(0,15,30,1) 0%, rgba(2,6,23,1) 100%)',
-      fontFamily: 'var(--font-mono)',
-      position: 'relative',
-      overflowX: 'hidden',
-      overflowY: 'auto',
-      scrollbarWidth: 'none',
-    }}>
+    <SectionWrapper
+      containerStyle={{
+        background: 'radial-gradient(ellipse at 40% 20%, rgba(0,15,30,1) 0%, rgba(2,6,23,1) 100%)',
+        overflowY: 'auto',
+        alignItems: 'flex-start',
+        padding: 0,
+        scrollbarWidth: 'none',
+      }}
+      contentStyle={{ maxWidth: '100%', width: '100%', padding: 0 }}
+      bgImage="/assets/bg/bg_experience.png"
+      bgOpacity={0.1}
+      bgMask="radial-gradient(circle at 50% 50%, black 20%, transparent 100%)"
+      glow={
+        <>
+          <motion.div animate={{ opacity: [0.05, 0.12, 0.05] }} transition={{ repeat: Infinity, duration: 6 }} style={{ position: 'fixed', top: '-20%', left: '-5%', width: '800px', height: '800px', background: 'radial-gradient(circle, var(--accent-color) 0%, transparent 65%)', filter: 'blur(120px)', pointerEvents: 'none', zIndex: 0 }} />
+          <motion.div animate={{ opacity: [0.04, 0.09, 0.04] }} transition={{ repeat: Infinity, duration: 8, delay: 2 }} style={{ position: 'fixed', bottom: '-20%', right: '-5%', width: '700px', height: '700px', background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 65%)', filter: 'blur(120px)', pointerEvents: 'none', zIndex: 0 }} />
+        </>
+      }
+    >
       {/* CRT scanlines */}
       <div style={{ position: 'fixed', inset: 0, background: 'repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, transparent 1px, transparent 3px)', pointerEvents: 'none', zIndex: 10 }} />
-
-      {/* Ambient backgrounds */}
-      <div style={{ position: 'fixed', inset: 0, backgroundImage: 'url(/assets/bg/bg_experience.png)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.1, mixBlendMode: 'screen', pointerEvents: 'none', maskImage: 'radial-gradient(circle at 50% 50%, black 20%, transparent 100%)', WebkitMaskImage: 'radial-gradient(circle at 50% 50%, black 20%, transparent 100%)' }} />
-
-      {/* Ambient glows */}
-      <motion.div animate={{ opacity: [0.05, 0.12, 0.05] }} transition={{ repeat: Infinity, duration: 6 }} style={{ position: 'fixed', top: '-20%', left: '-5%', width: '800px', height: '800px', background: 'radial-gradient(circle, var(--accent-color) 0%, transparent 65%)', filter: 'blur(120px)', pointerEvents: 'none', zIndex: 0 }} />
-      <motion.div animate={{ opacity: [0.04, 0.09, 0.04] }} transition={{ repeat: Infinity, duration: 8, delay: 2 }} style={{ position: 'fixed', bottom: '-20%', right: '-5%', width: '700px', height: '700px', background: 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 65%)', filter: 'blur(120px)', pointerEvents: 'none', zIndex: 0 }} />
 
       {/* ── Premium HUD Header ── */}
       <header style={{
@@ -545,7 +574,7 @@ export default function TimelinePage() {
       <div style={{ maxWidth: '1250px', margin: '0 auto', padding: 'clamp(3rem, 7vh, 5rem) clamp(1rem, 5vw, 3rem) 8rem', position: 'relative', zIndex: 5 }}>
 
         {/* Section subtitle */}
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }} style={{ textAlign: 'center', marginBottom: 'clamp(3rem, 8vh, 6rem)' }}>
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }} style={{ display: 'none', textAlign: 'center', marginBottom: 'clamp(3rem, 8vh, 6rem)' }}>
           <div className="tribal-heading" style={{ justifyContent: 'center', marginBottom: '0.8rem', letterSpacing: '0.4em' }}>LOG_EVOLUSI_LELUHUR // CHRONOLOGICAL_ARCHIVE</div>
           <h2 style={{ fontFamily: 'var(--font-header)', fontSize: 'clamp(2rem, 5vw, 4.5rem)', fontWeight: 950, letterSpacing: '-2px', textTransform: 'uppercase', margin: '0 0 1rem', lineHeight: 1 }}>
             NARASI <span style={{ color: 'var(--accent-color)' }}>EKSISTENSI</span>
@@ -681,6 +710,6 @@ export default function TimelinePage() {
           .side-slot { padding-left: 0.8rem !important; }
         }
       `}</style>
-    </div>
+    </SectionWrapper>
   );
 }
