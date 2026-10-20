@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, ExternalLink } from 'lucide-react';
 import type { PortfolioItem } from './types';
 
 interface DetailModalProps {
@@ -77,6 +77,36 @@ export function DetailModal({ item, accentColor, onClose }: DetailModalProps) {
             <div style={{ display: 'flex', gap: '2rem', marginTop: '1rem', flexWrap: 'wrap' }}>
               {item.role && <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}><span style={{ color: accentColor, fontWeight: 700 }}>Peran:</span> {item.role}</span>}
               {item.team && <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)' }}><span style={{ color: accentColor, fontWeight: 700 }}>Tim:</span> {item.team}</span>}
+            </div>
+          )}
+          {item.link && item.link !== '#' && (
+            <div style={{ marginTop: '1.2rem' }}>
+              <motion.a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.03, x: 4, background: `${accentColor}25` }}
+                whileTap={{ scale: 0.97 }}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '0.6rem 1.4rem',
+                  background: `${accentColor}15`,
+                  border: `1px solid ${accentColor}70`,
+                  borderRadius: '8px',
+                  color: accentColor,
+                  textDecoration: 'none',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.75rem',
+                  fontWeight: 900,
+                  letterSpacing: '1.5px',
+                  textTransform: 'uppercase',
+                  boxShadow: `0 0 15px ${accentColor}15`,
+                }}
+              >
+                <ExternalLink size={14} /> BUKA WEBSITE LIVE
+              </motion.a>
             </div>
           )}
         </div>

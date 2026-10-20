@@ -12,7 +12,7 @@ const SECTIONS = [
   { id: 'experience', steps: 4, Component: Experience },
   { id: 'education', steps: 2, Component: Education },
   { id: 'services', steps: 6, Component: Services },
-  { id: 'portfolio', steps: 3, Component: Portfolio },
+  { id: 'portfolio', steps: 4, Component: Portfolio },
   { id: 'contact', steps: 2, Component: Contact },
 ];
 

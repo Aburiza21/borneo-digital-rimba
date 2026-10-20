@@ -11,45 +11,59 @@ interface PortfolioProps {
 
 const projects = [
   {
-    id: '᚛ PRE-DIGITAL-06 ᚜',
-    title: { id: 'Presensi Digital Office', en: 'Digital Office Attendance' },
-    category: { id: 'HR & Management', en: 'HR & Management' },
-    image: '/assets/projects/presensi.png',
+    id: '᚛ KEMENHUB-01 ᚜',
+    title: { id: 'Digital Office Kemenhub RI', en: 'Digital Office Kemenhub RI' },
+    category: { id: 'GovTech & Administration', en: 'GovTech & Administration' },
+    image: '/assets/projects/digitaloffice.png',
     link: 'https://digitaloffice.kemenhub.go.id/',
-    tech: ['Laravel Blade', 'Tailwind', 'Docker', 'Kubernetes', 'SSO'],
-    achievement: { id: 'Sistem Kehadiran Terintegrasi', en: 'Integrated Attendance System' },
+    tech: ['Laravel', 'PostgreSQL', 'Redis', 'Docker', 'Kubernetes', 'SSO'],
+    achievement: { id: 'Portal Layanan & Presensi 10.000+ Pegawai', en: 'Services & Attendance for 10.000+ Staff' },
     accent: 'var(--accent-color)',
     desc: {
-      id: 'Aplikasi presensi digital dengan skalabilitas tinggi menggunakan Kubernetes dan integrasi SSO untuk kemudahan akses karyawan.',
-      en: 'Digital attendance application with high scalability using Kubernetes and SSO integration for easy employee access.'
+      id: 'Portal layanan digital terpadu administrasi perkantoran Sekretariat Jenderal Kementerian Perhubungan RI, presensi nasional 10.000+ pegawai, dan SSO terpusat.',
+      en: 'Integrated digital services and office administration portal for Secretariat General of Ministry of Transportation, 10,000+ staff attendance, and centralized SSO.'
     }
   },
   {
-    id: '᚛ KMS-SYSTEM-05 ᚜',
-    title: { id: 'KMS Knowledge Management', en: 'Knowledge Management System' },
-    category: { id: 'Enterprise Solutions', en: 'Enterprise Solutions' },
-    image: '/assets/projects/kms.png',
-    link: '#',
-    tech: ['Golang', 'Python', 'Next.js', 'PostgreSQL', 'Docker', 'SSO'],
-    achievement: { id: 'Sistem Manajemen Pengetahuan Terpusat', en: 'Centralized Knowledge Management System' },
-    accent: 'var(--accent-tertiary)',
-    desc: {
-      id: 'Platform manajemen pengetahuan untuk mengorganisir, menyimpan, dan membagikan informasi enterprise secara efisien dengan integrasi SSO.',
-      en: 'Knowledge management platform to organize, store, and share enterprise information efficiently with SSO integration.'
-    }
-  },
-  {
-    id: '᚛ LOG-SMART-01 ᚜',
-    title: { id: 'Logbook (Control Room)', en: 'Logbook (Control Room)' },
-    category: { id: 'Full Stack & Industrial', en: 'Full Stack & Industrial' },
-    image: '/assets/projects/logbook.png',
-    link: '#',
-    tech: ['Laravel', 'Inertia', 'React', 'Postgres', 'Docker'],
-    achievement: { id: 'Silver Award & Top 3 Presentasi Terbaik', en: 'Silver Award & Top 3 Best Presentation' },
+    id: '᚛ ATHUB-KL-02 ᚜',
+    title: { id: 'Atase Perhubungan Kuala Lumpur', en: 'Transportation Attaché Kuala Lumpur' },
+    category: { id: 'Diplomacy & Transportation', en: 'Diplomacy & Transportation' },
+    image: '/assets/projects/athubkl.png',
+    link: 'https://athubkl.kemenhub.go.id/atase-perhubungan/',
+    tech: ['PHP', 'TailwindCSS', 'MySQL', 'REST API', 'Cloudflare'],
+    achievement: { id: 'Virtual Office & Diplomasi Bilateral RI–MY', en: 'Virtual Office & Bilateral Transport Hub' },
     accent: 'var(--accent-secondary)',
     desc: {
-      id: 'Sistem operasional terpusat untuk industri kritis dengan reliabilitas tinggi. Mendigitalisasi pencatatan operasional secara real-time.',
-      en: 'Centralized operational system for critical industry with high reliability. Digitalizing operational logging with real-time visibility.'
+      id: 'Platform Virtual Office resmi Atase Perhubungan RI di KBRI Kuala Lumpur, memfasilitasi konektivitas transportasi antar-negara dan keterbukaan informasi bilateral.',
+      en: 'Official Virtual Office platform of Indonesian Transportation Attaché at KBRI Kuala Lumpur, managing bilateral connectivity and diplomatic services.'
+    }
+  },
+  {
+    id: '᚛ PEB-ENERGY-03 ᚜',
+    title: { id: 'PT Pelayanan Energi Batam', en: 'PT Pelayanan Energi Batam' },
+    category: { id: 'Energy & Corporate Infrastructure', en: 'Energy & Corporate Infrastructure' },
+    image: '/assets/projects/danantara_peb.png',
+    link: 'https://new.peb.co.id/',
+    tech: ['React', 'Next.js', 'TailwindCSS', 'Framer Motion', 'TypeScript'],
+    achievement: { id: 'Danantara Indonesia · Anak Perusahaan PLN Batam', en: 'National Energy Infrastructure Portal' },
+    accent: 'var(--accent-color)',
+    desc: {
+      id: 'Website korporasi modern "Energi Untuk Negeri" untuk anak usaha PT PLN Batam di bawah Danantara Indonesia dengan fitur bilingual (ID/EN) dan UI/UX mutakhir.',
+      en: 'Modern corporate website for PT PLN Batam subsidiary under Danantara Indonesia featuring bilingual support (ID/EN) and high-performance UX.'
+    }
+  },
+  {
+    id: '᚛ HNK-STUDIO-04 ᚜',
+    title: { id: 'Hulu Nautika Khatulistiwa', en: 'Hulu Nautika Khatulistiwa' },
+    category: { id: 'Creative Agency & Studio', en: 'Creative Agency & Studio' },
+    image: '/assets/projects/hulunautika.png',
+    link: 'https://hulunautika.com/',
+    tech: ['Next.js', 'React', 'TailwindCSS', 'Framer Motion', 'Lucide'],
+    achievement: { id: 'Social Media Workspace & Branding Platform', en: 'Commercial Branding & Media Studio' },
+    accent: 'var(--accent-tertiary)',
+    desc: {
+      id: 'Platform agensi kreatif dan workspace media sosial interaktif "Branding Tidak Perlu Mahal dan Susah", showcase pembuatan konten, logo branding, dan reels.',
+      en: 'Interactive creative agency and social media workspace platform showcasing content creation, logo branding, corporate identity, and commercial reels.'
     }
   },
 ];

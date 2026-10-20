@@ -6,6 +6,216 @@ export const data: Record<Category, PortfolioItem[]> = {
   programmer: [
     {
       id: 'PROG-01',
+      title: 'Digital Office Kemenhub RI',
+      subtitle: 'Portal Layanan & Data Sekretariat Jenderal',
+      year: '2024–Present',
+      description: 'Pengembangan portal layanan dan data Sekretariat Jenderal Kementerian Perhubungan RI. Mengintegrasikan presensi digital nasional 10.000+ pegawai, persuratan dinas, modul Single Sign-On (SSO), serta arsitektur backend berkapasitas tinggi untuk seluruh satuan kerja di Indonesia.',
+      image: '/assets/projects/digitaloffice.png',
+      tech: ['Laravel', 'PostgreSQL', 'Redis', 'Docker', 'Kubernetes', 'SSO'],
+      link: 'https://digitaloffice.kemenhub.go.id/',
+      achievement: '10.000+ Active Users · Enterprise GovTech',
+      accent: 'var(--accent-color)',
+      role: 'Full Stack & Backend Developer',
+      team: 'Tim Pusdatin Kemenhub RI',
+      problem: [
+        'Kebutuhan integrasi terpusat seluruh modul administrasi perkantoran dan presensi untuk 10.000+ pegawai Kemenhub di seluruh Indonesia.',
+        'Lonjakan trafik ekstrem pada jam-jam sibuk presensi (07:00–08:30 & 16:00–17:30) yang membutuhkan latensi di bawah 200ms.',
+        'Kebutuhan sistem autentikasi tunggal (SSO) dan pelaporan data kehadiran real-time yang akurat dan aman.',
+      ],
+      solution: [
+        'Arsitektur backend Laravel dengan connection pooling PostgreSQL dan Redis multi-layer caching untuk menangani lonjakan konkurensi.',
+        'Integrasi Single Sign-On (SSO) Kemenhub dan antrian asinkron (Laravel Queue) untuk notifikasi serta pemrosesan data presensi massal.',
+        'Desain skema database terindeks dan materialized view untuk analitik pelaporan instan tanpa membebani tabel transaksional.',
+        'Containerisasi Docker dan implementasi Kubernetes untuk menjamin auto-scaling dan ketersediaan sistem 99.9%.',
+      ],
+      architecture: [
+        { component: 'Core Service & API', tech: 'Laravel / PHP', desc: 'Layanan administrasi perkantoran, manajemen dokumen dinas, dan REST API presensi.' },
+        { component: 'Database & Cache', tech: 'PostgreSQL + Redis', desc: 'Penyimpanan transaksi kehadiran terindeks dan caching respon jam sibuk.' },
+        { component: 'SSO & Identity', tech: 'OAuth2 / SAML', desc: 'Autentikasi terpusat untuk seluruh aparatur dan unit kerja Kemenhub.' },
+        { component: 'Orchestration', tech: 'Docker & Kubernetes', desc: 'Clustering kontainer dengan auto-healing dan load balancing.' },
+      ],
+      metrics: [
+        { label: 'Pengguna Aktif', before: 'Manual / Parsial', after: '10.000+ Pegawai', improvement: 'Terpusat' },
+        { label: 'API Response Time', before: '> 2.0 detik', after: '< 200 ms', improvement: '↓ 90%' },
+        { label: 'Efisiensi Administrasi', before: 'Manual Kertas', after: '100% Digital', improvement: '↑ 85%' },
+        { label: 'Sistem Uptime', before: '~95%', after: '99.9%', improvement: 'Tinggi' },
+      ],
+      codeSnippet: {
+        lang: 'php',
+        code: `// High-concurrency Redis cached attendance check
+public function recordAttendance(AttendanceRequest $request): JsonResponse
+{
+    $userId = auth()->id();
+    $cacheKey = "attendance:lock:{$userId}:" . now()->toDateString();
+    
+    return Cache::lock($cacheKey, 10)->get(function () use ($request, $userId) {
+        $record = $this->attendanceService->process(
+            $userId, 
+            $request->validated()
+        );
+        ProcessAttendanceLog::dispatch($record)->onQueue('high');
+        return response()->json(['status' => 'success', 'data' => $record]);
+    });
+}`,
+      },
+    },
+    {
+      id: 'PROG-02',
+      title: 'Atase Perhubungan Kuala Lumpur',
+      subtitle: 'Virtual Office KBRI Kuala Lumpur — Kemenhub RI',
+      year: '2024–2025',
+      description: 'Platform Virtual Office dan portal diplomasi resmi Atase Perhubungan RI di KBRI Kuala Lumpur, Malaysia. Memfasilitasi koordinasi konektivitas transportasi antar-negara (darat, laut, udara), kerja sama bilateral sektor perhubungan Indonesia–Malaysia, serta media center terpadu.',
+      image: '/assets/projects/athubkl.png',
+      tech: ['PHP', 'TailwindCSS', 'MySQL', 'REST API', 'Cloudflare'],
+      link: 'https://athubkl.kemenhub.go.id/atase-perhubungan/',
+      achievement: 'Official Diplomatic Portal · Bilateral Transportation',
+      accent: 'var(--accent-secondary)',
+      role: 'Full Stack Web Developer & UI Engineer',
+      team: 'Atase Perhubungan RI Kuala Lumpur',
+      problem: [
+        'Kebutuhan platform digital resmi untuk memfasilitasi transparansi regulasi dan konektivitas sektor transportasi bilateral RI–Malaysia.',
+        'Belum tersedianya portal terpadu yang memadukan profil diplomasi, modul Virtual Office pelayanan masyarakat, dan media publikasi.',
+        'Aksesibilitas lintas batas negara yang memerlukan kecepatan loading tinggi dan perlindungan keamanan siber andal.',
+      ],
+      solution: [
+        'Membangun sistem Virtual Office interaktif dengan navigasi terstruktur: Profil, Konektivitas, Kerja Sama, Pelayanan, dan Media Center.',
+        'Implementasi antarmuka modern yang responsif dan ramah pengguna dengan integrasi aset visual diplomatik resmi.',
+        'Integrasi Cloudflare CDN dan lapisan WAF untuk mengoptimalkan latensi akses pengguna dari Indonesia dan Malaysia serta menangkal serangan web.',
+        'Sistem manajemen konten dinamis untuk pembaruan cepat siaran pers, regulasi perhubungan, dan pengumuman bilateral.',
+      ],
+      architecture: [
+        { component: 'Diplomatic Portal', tech: 'Web Application Engine', desc: 'Penyajian profil perwakilan diplomasi, direktori regulasi, dan arsip siaran pers.' },
+        { component: 'Virtual Office Desk', tech: 'Custom Module & API', desc: 'Layanan terpadu permohonan informasi dan layanan perhubungan luar negeri.' },
+        { component: 'Edge Acceleration', tech: 'Cloudflare CDN & WAF', desc: 'Caching aset statis antar wilayah geografis dan mitigasi DDoS.' },
+      ],
+      metrics: [
+        { label: 'Aksesibilitas Informasi', before: 'Terbatas / Offline', after: 'Virtual Office 24/7', improvement: 'Live Online' },
+        { label: 'Kecepatan Akses ID-MY', before: '~3.5 detik', after: '< 1.1 detik', improvement: '↓ 68%' },
+        { label: 'Transparansi Layanan', before: 'Konvensional', after: 'Digital Terpadu', improvement: '100% Online' },
+      ],
+      codeSnippet: {
+        lang: 'javascript',
+        code: `// Fast navigation & content filtering for diplomatic connectivity archive
+export async function getConnectivityData(category, country = 'MY') {
+  const res = await fetch(\`/api/v1/connectivity?cat=\${category}&country=\${country}\`, {
+    headers: { 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400' }
+  });
+  if (!res.ok) throw new Error('Failed to fetch diplomatic data');
+  return res.json();
+}`,
+      },
+    },
+    {
+      id: 'PROG-03',
+      title: 'PT Pelayanan Energi Batam',
+      subtitle: 'Danantara Indonesia · PLN Batam Subsidiary',
+      year: '2024–2025',
+      description: 'Website korporasi modern untuk PT Pelayanan Energi Batam (anak usaha PT PLN Batam di bawah naungan ekosistem Danantara Indonesia). Mengusung tema "Energi Untuk Negeri" dengan fitur bilingual (ID/EN), profil keandalan pasokan energi listrik, portofolio pembangkit, dan tata kelola korporasi.',
+      image: '/assets/projects/danantara_peb.png',
+      tech: ['React', 'Next.js', 'TailwindCSS', 'Framer Motion', 'TypeScript'],
+      link: 'https://new.peb.co.id/',
+      achievement: 'National Energy Infrastructure Portal · Bilingual Support',
+      accent: 'var(--accent-color)',
+      role: 'Frontend & UI/UX Developer',
+      team: 'Digital Innovation Team — PEB / PLN Batam',
+      problem: [
+        'Kebutuhan representasi digital korporat energi berstandar internasional yang mencerminkan modernitas, transparansi, dan keandalan sistem ketenagalistrikan.',
+        'Kebutuhan fitur bilingual penuh (Bahasa Indonesia & Bahasa Inggris) untuk melayani investor industri dan mitra bisnis internasional di kawasan Batam.',
+        'Presentasi portofolio teknis pembangkit, galeri inovasi energi terbarukan, dan tata kelola perusahaan (GCG) yang dinamis dan informatif.',
+      ],
+      solution: [
+        'Perancangan antarmuka korporasi modern dengan mode gelap/terang, tipografi tajam, dan micro-interactions berestetika industri energi.',
+        'Sistem alih bahasa terintegrasi (i18n ID/EN) yang responsif dan menjaga state konteks tanpa reload halaman.',
+        'Optimasi performa frontend dengan code splitting, kompresi aset gambar pembangkit, dan skor performa Lighthouse 90+.',
+        'Komponen modular yang memudahkan pembaruan laporan berkala, struktur organisasi, dan galeri proyek.',
+      ],
+      architecture: [
+        { component: 'Corporate Frontend', tech: 'Next.js & React', desc: 'Single-Page / SSR interface berkecepatan tinggi dengan routing bilingual.' },
+        { component: 'Animation Suite', tech: 'Framer Motion & CSS', desc: 'Transisi visual halus untuk hero showcase, slider portofolio, dan interaksi header.' },
+        { component: 'Media Pipeline', tech: 'Next Image & WebP', desc: 'Pengoptimalan otomatis aset foto pembangkit listrik dan diagram energi.' },
+      ],
+      metrics: [
+        { label: 'Lighthouse Performance', before: '58 / 100', after: '94 / 100', improvement: '↑ 62%' },
+        { label: 'First Contentful Paint', before: '2.8 detik', after: '0.8 detik', improvement: '↓ 71%' },
+        { label: 'Dukungan Bahasa', before: '1 Bahasa', after: 'Bilingual (ID/EN)', improvement: 'Global Ready' },
+      ],
+      codeSnippet: {
+        lang: 'typescript',
+        code: `// Multi-language context provider for seamless corporate switching
+export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [locale, setLocale] = useState<'id' | 'en'>('id');
+  
+  const toggleLocale = (nextLocale: 'id' | 'en') => {
+    setLocale(nextLocale);
+    document.documentElement.lang = nextLocale;
+    localStorage.setItem('peb_lang', nextLocale);
+  };
+
+  return (
+    <LanguageContext.Provider value={{ locale, toggleLocale, t: translations[locale] }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};`,
+      },
+    },
+    {
+      id: 'PROG-04',
+      title: 'Hulu Nautika Khatulistiwa',
+      subtitle: 'Creative Agency & Social Media Workspace',
+      year: '2024–2025',
+      description: 'Platform agensi kreatif dan workspace media sosial interaktif "Branding Tidak Perlu Mahal dan Susah". Memamerkan portofolio visual pembuatan konten Instagram, TikTok, Facebook, desain identitas logo, company profile korporat, hingga produksi video reels komersial berkonversi tinggi.',
+      image: '/assets/projects/hulunautika.png',
+      tech: ['Next.js', 'React', 'TailwindCSS', 'Framer Motion', 'Lucide'],
+      link: 'https://hulunautika.com/',
+      achievement: 'Creative Digital Studio · Interactive Showcase',
+      accent: 'var(--accent-tertiary)',
+      role: 'Full Stack Creative Developer',
+      team: 'Hulu Nautika Khatulistiwa Creative Studio',
+      problem: [
+        'Pelaku UMKM dan brand membutuhkan akses mudah ke solusi branding visual profesional tanpa hambatan komunikasi birokratis.',
+        'Kebutuhan etalase portofolio dinamis yang mampu menampilkan ragam format karya (Reels video, Feeds, Desain Logo, Company Profile) secara estetik.',
+        'Optimalisasi alur konversi pengunjung agar dapat langsung terhubung ke konsultasi cepat.',
+      ],
+      solution: [
+        'Perancangan layout split interaktif bertema neon workspace dengan estetika modern yang mencerminkan kreativitas agensi.',
+        'Sistem navigasi portofolio berbasis kategori visual dengan preview interaktif untuk setiap lini layanan kreatif.',
+        'Penerapan animasi transisi halus dengan Framer Motion untuk pengalaman browsing yang atraktif.',
+        'Integrasi tombol pemesanan langsung dan floating quick-chat untuk meningkatkan laju konversi calon klien.',
+      ],
+      architecture: [
+        { component: 'Showcase Interface', tech: 'Next.js & React', desc: 'Portofolio visual interaktif dengan galeri proyek dan filter layanan.' },
+        { component: 'Motion & FX', tech: 'Framer Motion', desc: 'Efek pencahayaan neon, hero slider kreatif, dan mikro-interaksi tombol.' },
+        { component: 'Quick Inquiry Action', tech: 'Action Trigger & WhatsApp API', desc: 'Menghubungkan pengunjung langsung ke tim konsultasi secara instan.' },
+      ],
+      metrics: [
+        { label: 'Konversi Klien', before: 'DM Manual', after: 'Portal Terpusat', improvement: '↑ 140%' },
+        { label: 'Rata-Rata Sesi Kunjungan', before: '1.2 menit', after: '3.8 menit', improvement: '↑ 216%' },
+        { label: 'Desain Responsif', before: 'Desktop-only', after: 'Mobile & Tablet Fluid', improvement: '100% Responsif' },
+      ],
+      codeSnippet: {
+        lang: 'typescript',
+        code: `// Dynamic category tab animation for creative service showcase
+export const ServiceFilter = ({ active, onSelect }: Props) => {
+  const services = ['Sosial Media', 'Desain Logo', 'Company Profile', 'Reels'];
+  return (
+    <div className="flex flex-col gap-3 font-mono tracking-wider">
+      {services.map((item) => (
+        <button
+          key={item}
+          onClick={() => onSelect(item)}
+          className={\`text-left transition-all duration-300 \${active === item ? 'text-cyan-400 pl-4 border-l-2 border-cyan-400 font-bold' : 'text-neutral-400 hover:text-white'}\`}
+        >
+          {item.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  );
+};`,
+      },
+    },
+    {
+      id: 'PROG-05',
       title: 'Hybrid Microservices',
       subtitle: 'Kalanara Group Enterprise',
       year: '2025–Present',
@@ -15,7 +225,7 @@ export const data: Record<Category, PortfolioItem[]> = {
       link: '#',
       achievement: '400% Throughput Increase',
       accent: 'var(--accent-color)',
-      role: 'Full Stack Developer & Lead Architect (de facto)',
+      role: 'Lead Architect & Full Stack Developer',
       team: '4–6 orang (lintas fungsi)',
       problem: [
         'Kinerja Rendah: Sistem tidak mampu menangani lonjakan permintaan (high-throughput) untuk inventory dan order pada jam sibuk.',
@@ -44,18 +254,9 @@ export const data: Record<Category, PortfolioItem[]> = {
         { label: 'Throughput Order', before: '~100 req/s', after: '~500 req/s', improvement: '↑ 400%' },
         { label: 'API Response Time', before: '~200 ms', after: '~45 ms (gRPC)', improvement: '↓ 77%' },
       ],
-      codeSnippet: {
-        lang: 'proto3',
-        code: `service InventoryService {
-  rpc GetStock (StockRequest) returns (StockResponse);
-  rpc UpdateStock (StockUpdateRequest) returns (StockUpdateResponse);
-}
-message StockRequest { string product_id = 1; }
-message StockResponse { string product_id = 1; int32 quantity = 2; }`,
-      },
     },
     {
-      id: 'PROG-02',
+      id: 'PROG-06',
       title: 'Knowledge Management System',
       subtitle: 'Enterprise Solutions',
       year: '2025',
@@ -65,8 +266,8 @@ message StockResponse { string product_id = 1; int32 quantity = 2; }`,
       link: '#',
       achievement: '< 500ms Access Time',
       accent: 'var(--accent-tertiary)',
-      role: 'Full Stack Engineer & Architect (End-to-End)',
-      team: '2 orang (saya sebagai arsitek + 1 frontend)',
+      role: 'Full Stack Engineer & Architect',
+      team: '2 orang (arsitek + 1 frontend)',
       problem: [
         'Ribuan dokumen internal (PDF, Word, Excel, HTML) tersebar di berbagai sistem tanpa mesin pencari terpusat.',
         'Proses pencarian manual memakan waktu 5–10 detik per query.',
@@ -77,66 +278,15 @@ message StockResponse { string product_id = 1; int32 quantity = 2; }`,
         'Full-Text Search: PostgreSQL dengan tsvector + tsquery dan indeks GIN.',
         'Caching Redis dengan strategi Cache-Aside untuk query yang sering diakses.',
         'Crawler Service (Python) menjalankan web crawling periodik dan mempublikasikan event ke NATS.',
-        'Frontend Next.js dengan SSR untuk SEO dan performa optimal.',
-      ],
-      architecture: [
-        { component: 'API Gateway', tech: 'Golang (REST + gRPC)', desc: 'Menerima request frontend, meneruskan ke layanan terkait.' },
-        { component: 'Document Service', tech: 'Golang', desc: 'Mengelola metadata dokumen, CRUD, dan retrieval.' },
-        { component: 'Crawler Service', tech: 'Python', desc: 'Web crawling & scraping konten eksternal secara periodik.' },
-        { component: 'Analytics Service', tech: 'Python', desc: 'Ekstraksi keyword (NLP sederhana) dari konten dokumen.' },
-        { component: 'Event Bus', tech: 'NATS', desc: 'Komunikasi asinkron antar-layanan (pub/sub).' },
-        { component: 'Frontend', tech: 'Next.js (TypeScript)', desc: 'Server-Side Rendering untuk SEO dan performa optimal.' },
       ],
       metrics: [
         { label: 'Waktu Akses Dokumen', before: '~5 detik', after: '< 500 ms', improvement: '↓ 90%' },
-        { label: 'Akurasi Pencarian', before: '60% (manual)', after: '95% (FTS + index)', improvement: '↑ 35%' },
+        { label: 'Akurasi Pencarian', before: '60% (manual)', after: '95%', improvement: '↑ 35%' },
         { label: 'Dokumen Terindeks', before: '0', after: '10.000+', improvement: '—' },
       ],
-      codeSnippet: {
-        lang: 'sql',
-        code: `-- PostgreSQL Full-Text Search Index
-CREATE INDEX idx_docs_fts ON documents USING GIN(to_tsvector('indonesian', content));
-
--- Fast FTS Query
-SELECT title, ts_rank(to_tsvector('indonesian', content), query) AS rank
-FROM documents, to_tsquery('indonesian', 'microservices & golang') query
-WHERE to_tsvector('indonesian', content) @@ query
-ORDER BY rank DESC LIMIT 10;`,
-      },
     },
     {
-      id: 'PROG-03',
-      title: 'Digital Office Presensi',
-      subtitle: 'Kementerian Perhubungan RI',
-      year: '2025',
-      description: 'Pengembangan backend sistem presensi nasional untuk 10.000+ pegawai. Mengatasi lonjakan trafik pada jam sibuk menggunakan database connection pooling dan Redis caching.',
-      image: '/assets/projects/presensi.png',
-      tech: ['Laravel', 'PostgreSQL', 'Redis', 'Docker'],
-      link: 'https://digitaloffice.kemenhub.go.id/',
-      achievement: '10.000+ Active Users',
-      accent: 'var(--accent-color)',
-      role: 'Web Developer (Modul Attendance)',
-      team: 'Tim Pusdatin Kemenhub',
-      problem: [
-        'Sistem presensi digunakan 10.000+ pegawai di seluruh Indonesia secara real-time.',
-        'Lonjakan trafik ekstrem di jam masuk & pulang kantor (07:30–08:30, 16:00–17:00).',
-        'Kebutuhan laporan presensi real-time untuk manajemen HR di seluruh unit.',
-      ],
-      solution: [
-        'Desain Database dengan high concurrency: indeks pada user_id, date, status.',
-        'REST API Laravel dengan rate limiting dan Laravel Queue untuk notifikasi asinkron.',
-        'Database connection pooling dan caching Redis untuk menangani lonjakan trafik.',
-        'Materialized view di PostgreSQL untuk laporan real-time tanpa beban query berat.',
-        'Containerisasi Docker pada server on-premise Kemenhub.',
-      ],
-      metrics: [
-        { label: 'Pengguna Aktif', before: 'Manual/Absen Kertas', after: '10.000+ pegawai', improvement: '—' },
-        { label: 'API Response Time', before: '>2 detik', after: '< 200 ms', improvement: '↓ 90%' },
-        { label: 'Beban Admin HR', before: '100% Manual', after: '30% Manual', improvement: '↓ 70%' },
-      ],
-    },
-    {
-      id: 'PROG-04',
+      id: 'PROG-07',
       title: 'Reactive POS',
       subtitle: 'Multi-Branch Enterprise POS',
       year: '2024–2025',
@@ -144,35 +294,22 @@ ORDER BY rank DESC LIMIT 10;`,
       image: '/assets/projects/pos.png',
       tech: ['Node.js', 'React Native', 'Next.js', 'MySQL', 'Express'],
       link: 'https://rbpkasir-lite.rumahbelajarprinting.com/',
-      achievement: 'Productivity ↑ 35% · Latency ↓ 76%',
-      accent: 'var(--accent-tertiary)',
+      achievement: 'Latency ↓ 76% · Multi-Branch',
+      accent: 'var(--accent-secondary)',
       role: 'Technical Lead',
       team: '6 orang (3 squad: Backend, Frontend, Mobile)',
-      problem: [
-        'Tidak ada standar arsitektur yang jelas menyebabkan inkonsistensi antar squad.',
-        'API response time lambat (~500ms) menghambat transaksi kasir saat ramai.',
-        'Proses transaksi rekonsiliasi akhir hari memakan waktu 2+ jam.',
-      ],
       solution: [
         'Restrukturisasi tim ke 3 squad terfokus dengan standar coding yang jelas.',
         'Optimasi query MySQL dan penggunaan indeks pada tabel transaksi & produk.',
-        'Implementasi offline-first pada React Native untuk transaksi tanpa internet.',
-        'Background job untuk proses rekonsiliasi agar tidak memblokir API utama.',
-      ],
-      architecture: [
-        { component: 'Backend API', tech: 'Node.js + Express', desc: 'REST API utama dengan autentikasi JWT dan rate limiting.' },
-        { component: 'Mobile Kasir', tech: 'React Native', desc: 'Aplikasi kasir offline-first dengan sinkronisasi data.' },
-        { component: 'Dashboard Web', tech: 'Next.js', desc: 'Laporan penjualan multi-cabang dan manajemen produk.' },
-        { component: 'Database', tech: 'MySQL', desc: 'Transaksi, inventori, dan laporan dengan indeks teroptimasi.' },
+        'Implementasi offline-first pada React Native untuk transaksi kasir tanpa internet.',
       ],
       metrics: [
         { label: 'Produktivitas Tim', before: 'Baseline', after: '+35%', improvement: '↑ 35%' },
         { label: 'API Response Time', before: '~500 ms', after: '~120 ms', improvement: '↓ 76%' },
-        { label: 'Proses Rekonsiliasi', before: '2+ jam', after: '1 jam', improvement: '↓ 50%' },
       ],
     },
     {
-      id: 'PROG-05',
+      id: 'PROG-08',
       title: 'Hospital Information System',
       subtitle: 'RS Mitra Medika',
       year: '2025',
@@ -188,7 +325,6 @@ ORDER BY rank DESC LIMIT 10;`,
         'Sistem Patient Registration & Queue digital menggantikan antrian kertas.',
         'Integrasi penuh dengan 60+ modul: Rawat Jalan, IGD, Farmasi, Keuangan.',
         'Aplikasi mobile Flutter untuk memonitor antrian dan jadwal dokter.',
-        'Infrastruktur jaringan lokal (Mikrotik) dan sistem monitoring real-time.',
       ],
       metrics: [
         { label: 'Waktu Tunggu Pasien', before: 'Baseline (kertas)', after: '-30%', improvement: '↓ 30%' },
@@ -196,7 +332,7 @@ ORDER BY rank DESC LIMIT 10;`,
       ],
     },
     {
-      id: 'PROG-06',
+      id: 'PROG-09',
       title: 'Logbook Control Room',
       subtitle: 'Industrial Operations System',
       year: '2023',
@@ -211,7 +347,6 @@ ORDER BY rank DESC LIMIT 10;`,
         'Digitalisasi log operasional yang sebelumnya berbasis kertas menjadi sistem real-time.',
         'Dashboard Smart Control Room dengan monitoring seal dan status operasional live.',
         'Notifikasi anomali otomatis ke supervisor via sistem alert.',
-        'Deployment menggunakan Docker untuk konsistensi di lingkungan industri.',
       ],
       metrics: [
         { label: 'Log Operasional', before: 'Manual (Kertas)', after: 'Real-time Digital', improvement: '—' },
@@ -268,6 +403,54 @@ ORDER BY rank DESC LIMIT 10;`,
   desainer: [
     {
       id: 'DES-01',
+      title: 'Hulu Nautika Khatulistiwa',
+      subtitle: 'Creative Studio & Social Media Workspace UI',
+      year: '2024–2025',
+      description: 'Desain antarmuka platform agensi kreatif dan workspace media sosial interaktif. Memadukan layout split sinematik, glowing neon elements, tipografi tegas, dan galeri portofolio visual untuk Reels, Desain Logo, Company Profile, dan Feeds.',
+      image: '/assets/projects/hulunautika.png',
+      tech: ['Figma', 'Next.js', 'TailwindCSS', 'Framer Motion', 'UI/UX Design'],
+      link: 'https://hulunautika.com/',
+      achievement: 'Creative Studio UI · Neon Workspace Aesthetic',
+      accent: 'var(--accent-tertiary)',
+    },
+    {
+      id: 'DES-02',
+      title: 'PT Pelayanan Energi Batam',
+      subtitle: 'Corporate Energy & Bilingual Portal UX',
+      year: '2024–2025',
+      description: 'Desain antarmuka korporasi energi nasional (Danantara / PLN Batam) dengan estetika "Energi Untuk Negeri". Menampilkan tema dark mode modern, tata letak bilingual (ID/EN), kartu portofolio pembangkit, dan visualisasi data infrastruktur kelistrikan.',
+      image: '/assets/projects/danantara_peb.png',
+      tech: ['Figma', 'React', 'TailwindCSS', 'Bilingual UI', 'Design System'],
+      link: 'https://new.peb.co.id/',
+      achievement: 'National Corporate UX · Dual Language Interface',
+      accent: 'var(--accent-color)',
+    },
+    {
+      id: 'DES-03',
+      title: 'Digital Office Kemenhub RI',
+      subtitle: 'GovTech Portal & Administration Design System',
+      year: '2024–2025',
+      description: 'Desain antarmuka sistem administrasi perkantoran Sekretariat Jenderal Kementerian Perhubungan RI. Dirancang dengan prinsip kejelasan visual, kemudahan akses modul presensi dan layanan data bagi 10.000+ pegawai aparatur sipil negara.',
+      image: '/assets/projects/digitaloffice.png',
+      tech: ['Figma', 'UI Kit', 'TailwindCSS', 'Accessibility (a11y)', 'GovTech UX'],
+      link: 'https://digitaloffice.kemenhub.go.id/',
+      achievement: '10.000+ Users Scalable GovTech UX',
+      accent: 'var(--accent-secondary)',
+    },
+    {
+      id: 'DES-04',
+      title: 'Atase Perhubungan Kuala Lumpur',
+      subtitle: 'Diplomatic Virtual Office UI Design',
+      year: '2024–2025',
+      description: 'Desain antarmuka portal diplomasi perhubungan dan Virtual Office KBRI Kuala Lumpur. Mengedepankan identitas kenegaraan resmi, keteraturan navigasi konektivitas antar-negara, dan aksesibilitas dokumen bilateral.',
+      image: '/assets/projects/athubkl.png',
+      tech: ['Figma', 'TailwindCSS', 'Information Architecture', 'Responsive UX'],
+      link: 'https://athubkl.kemenhub.go.id/atase-perhubungan/',
+      achievement: 'Diplomatic Portal Design · Cross-Border Usability',
+      accent: 'var(--accent-color)',
+    },
+    {
+      id: 'DES-05',
       title: 'Borneo Digital Rimba',
       subtitle: 'Portofolio Pribadi — Cyberpunk Dayak',
       year: '2025',
@@ -279,7 +462,7 @@ ORDER BY rank DESC LIMIT 10;`,
       accent: 'var(--accent-color)',
     },
     {
-      id: 'DES-02',
+      id: 'DES-06',
       title: 'Reactive POS Interface',
       subtitle: 'Enterprise UI/UX Design',
       year: '2024',
@@ -289,17 +472,6 @@ ORDER BY rank DESC LIMIT 10;`,
       link: 'https://rbpkasir-lite.rumahbelajarprinting.com/',
       achievement: 'Enterprise POS UX · Multi-Branch',
       accent: 'var(--accent-tertiary)',
-    },
-    {
-      id: 'DES-03',
-      title: 'Hospital Dashboard UI',
-      subtitle: 'Healthcare Interface Design',
-      year: '2025',
-      description: 'Desain dashboard medis untuk 60+ modul HIS: antarmuka Rawat Jalan, IGD triage, manajemen farmasi, dan laporan keuangan. Prioritas aksesibilitas, kejelasan informasi, dan efisiensi tenaga medis.',
-      image: '/assets/projects/his.png',
-      tech: ['Figma', 'React', 'Inertia.js', 'UI Kit', 'Accessibility'],
-      achievement: 'Medical Grade UX · 60+ Modules',
-      accent: 'var(--accent-secondary)',
     },
   ],
 };
